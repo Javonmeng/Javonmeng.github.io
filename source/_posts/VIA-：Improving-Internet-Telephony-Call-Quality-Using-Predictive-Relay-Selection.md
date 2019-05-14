@@ -40,7 +40,7 @@ The use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime
     - Temporal patterns:
       - we need to dynamically decide if a call should use default Internet routing or be relayed.
   
-  ## VIA
+## VIA
 - VIA Architecture
   - consists of relay nodes placed at globally distributed datacenters, such as those run by Amazon, Google, and Microsoft
   - 在caller和callee存在一个controller, 由它来根据historical calls和policy constraints来决定是否中继，如何中继。 
