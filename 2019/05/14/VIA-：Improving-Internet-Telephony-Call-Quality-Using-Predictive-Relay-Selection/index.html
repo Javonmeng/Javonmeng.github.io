@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Javon">
 <meta property="og:description" content="Introduction ScenarioThe use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime Introduction VIA uses an approach called prediction-guided explorationto decide which calls to relay and">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-14T13:21:26.812Z">
+<meta property="og:updated_time" content="2019-05-14T13:30:33.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VIA ：Improving Internet Telephony Call Quality Using  Predictive Relay Selection">
 <meta name="twitter:description" content="Introduction ScenarioThe use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime Introduction VIA uses an approach called prediction-guided explorationto decide which calls to relay and">
@@ -371,9 +371,11 @@
 <li>Contributions<ul>
 <li>分析了net performance对通话质量的影响</li>
 <li>量化了a managed overlay network对于通话质量的改进</li>
-<li>提出了relay selection algorithm， 性能是close to optimal<h2 id="VoIP-Performance-in-the-Wild"><a href="#VoIP-Performance-in-the-Wild" class="headerlink" title="VoIP Performance in the Wild"></a>VoIP Performance in the Wild</h2></li>
+<li>提出了relay selection algorithm， 性能是close to optimal</li>
 </ul>
 </li>
+</ul>
+<h2 id="VoIP-Performance-in-the-Wild"><a href="#VoIP-Performance-in-the-Wild" class="headerlink" title="VoIP Performance in the Wild"></a>VoIP Performance in the Wild</h2><ul>
 <li>Dataset<ul>
 <li>dataset from Skype, consist of a sampled set of 430 million audio calls 好大的数据集，羡慕</li>
 <li>数据集中包含路由使用默认路径(e.g., BGP-derived)和使用数据中心的managed relay nodes这两种</li>
@@ -382,7 +384,8 @@
 <li>除了PCR，[17] 也提供了一种分析audio call quality的工具， <em>Mean Opinion Score (MOS)</em></li>
 </ul>
 </li>
-<li>分析call quality 与  Network performance<ul>
+<li><p>分析call quality 与  Network performance</p>
+<ul>
 <li>use-perceived quality对network performance (RTT, loss rate and jitter)敏感。</li>
 <li>对数据分析，给出了统计的over 15%的PCR案例各个netwoek performance 参数的门限值。( RTT over 320ms, or loss over 1.2%, or jitter more than 12ms ). </li>
 <li>给出了poor network rate的定义： performance on the metric is worse than the chosen thresholds: RTT  320ms, loss rate  1.2%, jitter  12ms. One of our goals is to reduce PNR of each individual metric<ul>
@@ -395,11 +398,11 @@
 <li>Temporal patterns:</li>
 </ul>
 </li>
-<li>we need to dynamically decide if a call should use default Internet routing or be relayed.<h2 id="VIA"><a href="#VIA" class="headerlink" title="VIA"></a>VIA</h2></li>
+<li>we need to dynamically decide if a call should use default Internet routing or be relayed.</li>
 </ul>
 </li>
 </ul>
-</li>
+<h2 id="VIA"><a href="#VIA" class="headerlink" title="VIA"></a>VIA</h2></li>
 <li>VIA Architecture<ul>
 <li>consists of relay nodes placed at globally distributed datacenters, such as those run by Amazon, Google, and Microsoft</li>
 <li>在caller和callee存在一个controller, 由它来根据historical calls和policy constraints来决定是否中继，如何中继。 </li>
@@ -453,9 +456,11 @@
 <li>Budgeted relaying<ul>
 <li>使用中继的calls所占比例要有限制，e.g., 30%</li>
 <li>It decides to relay a call only if the benefit of relaying is sufficiently high.</li>
-<li>It decides to relay a call only if the expected benefit is above the Bth percentile benefit.<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2></li>
+<li>It decides to relay a call only if the expected benefit is above the Bth percentile benefit.</li>
 </ul>
 </li>
+</ul>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><ul>
 <li>Evaluation<ul>
 <li>The calls are replayed in the same chronological as in the trace.</li>
 <li>the relaying options considered for a call are only those with at least 10 call samples on at least 5 relay options。为了使中继的选择更优信服力</li>
@@ -472,9 +477,11 @@
 </ul>
 </li>
 <li>Real-world controlled deployment<ul>
-<li>We implemented and deployed a prototype containing the relevant components of VIA at a small scale using modified Skype clients and using Skype’s production relays. The central controller of our prototype (Figure 7), deployed on the public Microsoft Azure cloud, aggregated performance measurements from instrumented Skype clients and implemented the relay selection algorithm. 这也太酷了，真的部署了还对Skype client进行了modification.<h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2></li>
+<li>We implemented and deployed a prototype containing the relevant components of VIA at a small scale using modified Skype clients and using Skype’s production relays. The central controller of our prototype (Figure 7), deployed on the public Microsoft Azure cloud, aggregated performance measurements from instrumented Skype clients and implemented the relay selection algorithm. 这也太酷了，真的部署了还对Skype client进行了modification.</li>
 </ul>
 </li>
+</ul>
+<h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2><ul>
 <li>Expressions<ul>
 <li>To bridge this gap, we analyze …</li>
 <li>largely ineffective</li>
