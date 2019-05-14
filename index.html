@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -352,144 +359,17 @@
       
         
           
-            <p>#VIA ：Improving Internet Telephony Call Quality Using  Predictive Relay Selection</p>
-<ul>
-<li>Scenario<br>The use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime</li>
-<li>Introduction<ul>
-<li>VIA uses an approach called prediction-guided explorationto decide which calls to relay and to pick the relay(s).  是否中继以及选择哪个中继</li>
-<li>It makes these decisions with performance information from call history, which tends to be limited and highly skewed. 利用history信息，但又说history信息非常有限且偏颇</li>
-<li>even though available performance information from call history may not suffice to accurately predict the best relay for each call, it can nevertheless help identify a small subset of relay choices that contains the best relay.根据 history信息给出一个包含最优解的集合。</li>
-<li>we use performance information from call history to filter out all but the most promising (top-k) relaying alternatives, from which, we then employ an online exploration-exploitation strategy to identify the optimal relay path, while staying within the relaying budget. Top-k choices，然后寻找optimal relay path, 好的想法。top-k中的k是一个可选参数，当k=1时就是直接给选择了，和我们平时理解采用的学习方法一致，但之前提到根据观察这并不一定是最优解；当k大时，趋于问题的规模又会类似搜索的方法，维度带来的复杂度成为问题。这两种思想的trade off。</li>
-</ul>
-</li>
-<li>Contributions<ul>
-<li>分析了net performance对通话质量的影响</li>
-<li>量化了a managed overlay network对于通话质量的改进</li>
-<li>提出了relay selection algorithm， 性能是close to optimal</li>
-</ul>
-</li>
-<li>Dataset<ul>
-<li>dataset from Skype, consist of a sampled set of 430 million audio calls 好大的数据集，羡慕</li>
-<li>数据集中包含路由使用默认路径(e.g., BGP-derived)和使用数据中心的managed relay nodes这两种</li>
-<li>Each call is associated with three metrics of network performance: (<em>i</em>) round-trip time (RTT), (<em>ii</em>) loss rate, and (<em>iii</em>) jitter。这里没有带宽，作者给出的解释是VoIP是低数据率业务。</li>
-<li>对call quality离散的标注，from 1 (worst) to 5 (best). 1 or 2 被认为是 “poor quality”，用来计算”Poor Call Rate (PCR)”</li>
-<li>除了PCR，[17] 也提供了一种分析audio call quality的工具， <em>Mean Opinion Score (MOS)</em></li>
-</ul>
-</li>
-<li>分析call quality 与  Network performance<ul>
-<li>use-perceived quality对network performance (RTT, loss rate and jitter)敏感。</li>
-<li>对数据分析，给出了统计的over 15%的PCR案例各个netwoek performance 参数的门限值。( RTT over 320ms, or loss over 1.2%, or jitter more than 12ms ). </li>
-<li>给出了poor network rate的定义： performance on the metric is worse than the chosen thresholds: RTT  320ms, loss rate  1.2%, jitter  12ms. One of our goals is to reduce PNR of each individual metric<ul>
-<li>Call with poor networks有什么共同的特点？spatial and temporal</li>
-</ul>
-</li>
-<li>Spatial patterns: <ul>
-<li>International 比Domestic 的PNR更高，Inter-AS比Intra-AS的PNR更高。This means that localized solutions that fix a few bad ASes or AS pairs, e.g., informing the AS administrators or the clients directly regarding their ISPs, are not sufficient.</li>
-<li>This suggests that poor network performance is quite widespread, highlightingthe suitability of a globally deployed overlay network thatprovides high performance inter-connection between overlay nodes.<ul>
-<li>Temporal patterns:</li>
-</ul>
-</li>
-<li>we need to dynamically decide if a call should use default Internet routing or be relayed.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>VIA Architecture<ul>
-<li>consists of relay nodes placed at globally distributed datacenters, such as those run by Amazon, Google, and Microsoft</li>
-<li>在caller和callee存在一个controller, 由它来根据historical calls和policy constraints来决定是否中继，如何中继。 </li>
-<li>历史测量数据由skype client周期性地提供给controller。controller不需要主动monitor relay nodes，Skype clients会提供end-to-end measurements。</li>
-<li>relay options: the default (direct) path, a bouncing relay path (one-hop) , or a transit relay path (pair)</li>
-<li>Need for dynamic relay selection:  The optimal relaying option for 30% of AS pairs lasts for less than 2 days, and only 20% of AS pairs have the same optimal relay option for more than 20 days. 在通信研究中也是 The relay selection should be done dynamically, rather than statically.</li>
-</ul>
-</li>
-<li>VIA Relay Selection<ul>
-<li>We describe two classes of strawman appro aches— purely predictive and exploration-based — and highlight limitations of both classes. We then present the core intuition behind our relay selection algorithm, called predictionguided exploration and then describe the solution.和之前在Introduction中提到的一样，基于预测一次到位和基于探索的方法结合。</li>
-<li>Our goal is to assign each call to a particular relaying option.</li>
-<li>$\mathop{\arg\min}\limits_{Assign\in R^C} \sum\limits_{c\in C}Q(c, Assign(c))$, 全局优化，不是针对单个call优化。</li>
-<li>Strawman approacher<ul>
-<li>Exploration-based: for every AS-pair and every possible relaying option r, we will explicitly use some of the calls to explore the option and measure the performance, Q(c, r).</li>
-<li>Prediction-based: we can use suitable prediction algorithms to predict theperformance Q(c, r) for every combination, and select the option that has the best predicted performance.</li>
-<li>这两个方法预测<em>Q(c,r)</em>竟然都不好， two key reasons:<ul>
-<li>there is a substantial difference in the number of call samples available across different source-destination pairs, both for the direct path and for the various relayed paths.</li>
-<li>To estimate Q(c, r), we need a significant number of samples before the empirically observed.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>没有见过的source-destination配对怎么处理<ul>
-<li>Network tomography can help estimate the performance of each network segment. Then, by stitching together the estimates for the individual segments, we can estimate the performance of a path not seen before</li>
-</ul>
-</li>
-<li>Prediction:<ul>
-<li>$Pred_{mean}(s,d,r)$</li>
-<li>$Pred_{sem}(s,d,r)$ standard error of mean</li>
-<li>95% confidence bounds<ul>
-<li>$Pred_{lower}(s,d,r)=Pred_{mean}(s,d,r)-1.96Pred_{sem}(s,d,r)$</li>
-<li>$Pred_{upper}(s,d,r)=Pred_{mean}(s,d,r)+1.96Pred_{sem}(s,d,r)$</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Pruning to get top-k choices<ul>
-<li>Instead of using a fixed value of k, VIA dynamically decides k based on the lower and higher confidence bounds for each relay r on the particular source-destination pair s and d.</li>
-<li>top-k中k的中继的上界比不在top-k中的下界还要小</li>
-</ul>
-</li>
-<li>Exploration-exploitation step<ul>
-<li>assigns a fraction of calls to explore different relay options ($\epsilon$-greedy) and the rest to exploit the best decision</li>
-<li>UCB1 algorithm: 数据variance大时直接Normalization会有问题，相同的case会有不同的decision.UB1 Algorithm用来处理exploration.</li>
-<li>不太理解怎么得到$C_r\leftarrow{c^\prime|Assign(c^\prime)=r}$：是实时获取当前使用中继r的$c\prime$吗？</li>
-<li>引入了general exploration来处理dynamic环境</li>
-</ul>
-</li>
-<li>Budgeted relaying<ul>
-<li>使用中继的calls所占比例要有限制，e.g., 30%</li>
-<li>It decides to relay a call only if the benefit of relaying is sufficiently high.</li>
-<li>It decides to relay a call only if the expected benefit is above the Bth percentile benefit.</li>
-</ul>
-</li>
-<li>Evaluation<ul>
-<li>The calls are replayed in the same chronological as in the trace.</li>
-<li>the relaying options considered for a call are only those with at least 10 call samples on at least 5 relay options。为了使中继的选择更优信服力</li>
-</ul>
-</li>
-<li>Benefits of prediction-guided exploration<ul>
-<li>instead of picking a fixed number top candidates, VIA pick top candidates by taking variance of prediction into account</li>
-</ul>
-</li>
-<li>Practical relaying factors<ul>
-<li>Relaying budget: we define budget as the maximum fraction of calls being relayed. Budget-aware VIA relays a call only when the benefit is larger than a threshold. 没看懂这里Oracle是那个参数如何控制budget的。</li>
-<li>Relaying decision granularities:First, making decision at granularities coarser than a per AS pair results in a smaller reduction in PNR; Second, making decisions on finer granularities does not help much, though for a different reason.所以最好的空间粒度是AS对</li>
-<li>Relay usage: Removing 50% of the (least used) relays causes little drop in VIA’s gains.</li>
-</ul>
-</li>
-<li>Real-world controlled deployment<ul>
-<li>We implemented and deployed a prototype containing the relevant components of VIA at a small scale using modified Skype clients and using Skype’s production relays. The central controller of our prototype (Figure 7), deployed on the public Microsoft Azure cloud, aggregated performance measurements from instrumented Skype clients and implemented the relay selection algorithm. 这也太酷了，真的部署了还对Skype client进行了modification.</li>
-</ul>
-</li>
-<li>Expression<ul>
-<li>To bridge this gap, we analyze …</li>
-<li>largely ineffective</li>
-<li>pragmatic  practical 务实的，实用的</li>
-<li>spanning 135 million users across 126 countries</li>
-<li>But contrary to our intuition</li>
-<li>envision 预想</li>
-<li>whose overhead can be prohibitive at large scale overhead 在大规模问题中的痛点</li>
-<li>close-to-optimal</li>
-<li>For each network metric, we bin calls based on theirnetwork performance and show the PCR of the calls withineach bin.</li>
-<li>Strawman approaches : The strawman is not expected to be the last word; it is refined until a final model or document is obtained that resolves all issues concerning the scope and nature of the project. 中间过渡的方法</li>
-</ul>
-</li>
-<li>Confusion<ul>
-<li>ASes是啥？ area states?</li>
-<li>Trace-driven analysis shows that an oracle-based overlay can potentially improve up to 53% of calls whose quality is impacted by poor network performance. oracle performance是怎么来的,oracle是说搜索遍历下的最优情况吗？</li>
-</ul>
-</li>
-</ul>
-
           
+VIA ：Improving Internet Telephony Call Quality Using  Predictive Relay Selection
+ScenarioThe use of Internet for voice call, i.e. Skype, WhatsApp, We
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/14/VIA-：Improving-Internet-Telephony-Call-Quality-Using-Predictive-Relay-Selection/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -555,7 +435,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/13/final-test/" itemprop="url">final test1</a></h1>
+                <a class="post-title-link" href="/2019/05/13/final-test/" itemprop="url">final test</a></h1>
         
 
         <div class="post-meta">
@@ -629,9 +509,16 @@
       
         
           
-            <p>#流程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line">hexo new post &quot;article&quot;</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;add a post&quot;</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">hexo d -g</span><br></pre></td></tr></table></figure></p>
+          #流程12345678git pullhexo new post &quot;article&quot;git add .git commit -m &quot;add a post&quot;git pushhexo d -g
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/13/final-test/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -749,17 +636,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/13/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1081,6 +966,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
