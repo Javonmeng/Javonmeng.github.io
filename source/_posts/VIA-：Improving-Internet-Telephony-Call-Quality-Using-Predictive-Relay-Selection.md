@@ -21,6 +21,7 @@ The use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime
   - 分析了net performance对通话质量的影响
   - 量化了a managed overlay network对于通话质量的改进
   - 提出了relay selection algorithm， 性能是close to optimal
+
 ## VoIP Performance in the Wild
 - Dataset
   - dataset from Skype, consist of a sampled set of 430 million audio calls 好大的数据集，羡慕
@@ -38,6 +39,7 @@ The use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime
       - This suggests that poor network performance is quite widespread, highlightingthe suitability of a globally deployed overlay network thatprovides high performance inter-connection between overlay nodes.
     - Temporal patterns:
       - we need to dynamically decide if a call should use default Internet routing or be relayed.
+  
   ## VIA
 - VIA Architecture
   - consists of relay nodes placed at globally distributed datacenters, such as those run by Amazon, Google, and Microsoft
@@ -75,6 +77,7 @@ The use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime
   - 使用中继的calls所占比例要有限制，e.g., 30%
   - It decides to relay a call only if the benefit of relaying is sufficiently high.
   - It decides to relay a call only if the expected benefit is above the Bth percentile benefit.
+
 ## Evaluation
 - Evaluation
   - The calls are replayed in the same chronological as in the trace.
@@ -87,6 +90,7 @@ The use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime
   - Relay usage: Removing 50% of the (least used) relays causes little drop in VIA’s gains.
 - Real-world controlled deployment
   - We implemented and deployed a prototype containing the relevant components of VIA at a small scale using modified Skype clients and using Skype’s production relays. The central controller of our prototype (Figure 7), deployed on the public Microsoft Azure cloud, aggregated performance measurements from instrumented Skype clients and implemented the relay selection algorithm. 这也太酷了，真的部署了还对Skype client进行了modification.
+
 ## Expressions
 - Expressions
   - To bridge this gap, we analyze ...
