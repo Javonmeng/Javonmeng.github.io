@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Javon">
 <meta property="og:description" content="Introduction ScenarioThe use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime Introduction VIA uses an approach called prediction-guided explorationto decide which calls to relay and">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-14T13:30:33.879Z">
+<meta property="og:updated_time" content="2019-05-14T13:35:47.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VIA ：Improving Internet Telephony Call Quality Using  Predictive Relay Selection">
 <meta name="twitter:description" content="Introduction ScenarioThe use of Internet for voice call, i.e. Skype, WhatsApp, WeChat, FaceTime Introduction VIA uses an approach called prediction-guided explorationto decide which calls to relay and">
@@ -384,8 +384,7 @@
 <li>除了PCR，[17] 也提供了一种分析audio call quality的工具， <em>Mean Opinion Score (MOS)</em></li>
 </ul>
 </li>
-<li><p>分析call quality 与  Network performance</p>
-<ul>
+<li>分析call quality 与  Network performance<ul>
 <li>use-perceived quality对network performance (RTT, loss rate and jitter)敏感。</li>
 <li>对数据分析，给出了统计的over 15%的PCR案例各个netwoek performance 参数的门限值。( RTT over 320ms, or loss over 1.2%, or jitter more than 12ms ). </li>
 <li>给出了poor network rate的定义： performance on the metric is worse than the chosen thresholds: RTT  320ms, loss rate  1.2%, jitter  12ms. One of our goals is to reduce PNR of each individual metric<ul>
@@ -402,7 +401,9 @@
 </ul>
 </li>
 </ul>
-<h2 id="VIA"><a href="#VIA" class="headerlink" title="VIA"></a>VIA</h2></li>
+</li>
+</ul>
+<h2 id="VIA"><a href="#VIA" class="headerlink" title="VIA"></a>VIA</h2><ul>
 <li>VIA Architecture<ul>
 <li>consists of relay nodes placed at globally distributed datacenters, such as those run by Amazon, Google, and Microsoft</li>
 <li>在caller和callee存在一个controller, 由它来根据historical calls和policy constraints来决定是否中继，如何中继。 </li>
