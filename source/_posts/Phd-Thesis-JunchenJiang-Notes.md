@@ -21,7 +21,7 @@ categories: Papers
 - DDN's features
   - Compared to in-network approaches, DDN can monitor client-side applications and thus can directly optimize user-perceived QoE, rather than indirect low-level metrics. Compared to endpoint-based approaches, DDN compensates the lack of visibility of network conditions at one endpoint by a real-time, **global view of QoE observed from many endpoints**, thus addressing the key limitation of the endpoint adaptation.
   - improve QoE by using **a logically centralized controller** (as illustrated in Figure 1.1) which maintains a global view of real-time network conditions by gathering QoE measured from many application sessions and uses this global view to make optimal decisions regarding the adaptation of individual sessions
-  - ![DNN's features](./Phd-Thesis-JunchenJiang-Notes/DDN1.PNG)
+  - ![DNN's features](Phd-Thesis-JunchenJiang-Notes/DDN1.PNG)
   - use realworld deployment and large-scale emulation to demonstrate that our solutions can substantially improve the QoE of video streaming and Internet telephony.我觉得我们这里根本做不到
   - 几种方法： 
     - CFA: a video QoE prediction system that can accurately predict the quality of a video client if it uses certain CDN and bitrate
