@@ -95,7 +95,7 @@
 <meta property="og:description" content="Abstract Keywords: Internet applications, Quality of Experience, Data-Driven Networking, user-perceived The key contribution of this dissertation is to bridge the long-standing gap between the visibil">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/15/Phd-Thesis-JunchenJiang-Notes/DDN1.PNG">
-<meta property="og:updated_time" content="2019-05-15T09:23:14.376Z">
+<meta property="og:updated_time" content="2019-05-18T10:11:55.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phd_Thesis_JunchenJiang_Notes">
 <meta name="twitter:description" content="Abstract Keywords: Internet applications, Quality of Experience, Data-Driven Networking, user-perceived The key contribution of this dissertation is to bridge the long-standing gap between the visibil">
@@ -390,11 +390,79 @@
 </ul>
 </li>
 </ul>
-<h2 id="QoE"><a href="#QoE" class="headerlink" title="QoE"></a>QoE</h2><h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2><ul>
+<h2 id="QoE"><a href="#QoE" class="headerlink" title="QoE"></a>QoE</h2><ul>
+<li>Video QoE metrics: buffering ratio; join time; average bitrate; join failures.<ul>
+<li>Dataset: based on client-side measurements of video quality from over 300 million sessions over a duration of two weeks. The unique feature of our dataset is that it is collected over 379 distinct content providers spanning diverse genres, both live and video-on-demand content, different content delivery platforms, different types of bitrate adaptation algorithms, and device/browser platforms.</li>
+</ul>
+</li>
+<li>VoIP QoE metrics: poor call rate (PCR)<ul>
+<li>dataset: The dataset from Skype consists of a sampled set of 430 million audio calls drawn from a seven month period.</li>
+<li>VoIP QoE distribution: The results show that a significant fraction of calls (over 15%) occur on paths with RTT over 320ms, or loss over 1.2%, or jitter more than 12ms, which we pick as our thresholds for poor performance.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Internet-Video"><a href="#Internet-Video" class="headerlink" title="Internet Video"></a>Internet Video</h2><ul>
+<li>播放速率控制<ul>
+<li>Early Internet video technologies: Apple QuickTime, Adobe Flash RTMP (based on connection-oriented video transport protocols)</li>
+<li>new generation of Internet video technologies: Microsoft Smooth Streaming, Apple’s HLS, Adobe’s HDS (全部都是HTTP-based adaptive streaming protocols)</li>
+</ul>
+</li>
+<li>HTTP-based  adaptive streaming protocols’ advantages: three points</li>
+</ul>
+<h2 id="Internet-Telephony"><a href="#Internet-Telephony" class="headerlink" title="Internet Telephony"></a>Internet Telephony</h2><ul>
+<li>managed overlay approach enjoys several practical benefits: three points</li>
+</ul>
+<h2 id="Improve-QoE"><a href="#Improve-QoE" class="headerlink" title="Improve QoE"></a>Improve QoE</h2><ul>
+<li>Prior Work on Quality Optimization</li>
+<li>Taxonomy<ul>
+<li>Where in the network? endpoint-based solutions (clients, servers, caches)and in-network solutions (switches, routers).</li>
+<li>Which level in the protocol stack? Lower levels and Application</li>
+</ul>
+</li>
+<li>Design trade-offs<ul>
+<li>More visibility to user-perceived QoE</li>
+<li>More visibility to network conditions</li>
+</ul>
+</li>
+<li>In-Network Solutions<ul>
+<li>IP-layer support for QoS: novel QoS service architecture</li>
+<li>Router-assist congestion control</li>
+<li>SDN-based approach</li>
+</ul>
+</li>
+<li>Endpoint Solutions<ul>
+<li>Overlay routing</li>
+<li>Congestion control</li>
+<li>Application-level adaptation</li>
+<li>Network performance prediction:<ul>
+<li>to use packet-level probes to estimate end-to-end performance;</li>
+<li>to build an “Internet performance map” based on active probes from a selective set of “vantage points”;</li>
+<li>to leverage the history of the same client-server pair </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="evaluation-of-performance"><a href="#evaluation-of-performance" class="headerlink" title="evaluation of performance"></a>evaluation of performance</h2><ul>
+<li>QoE metrics - we need to optimize user-perceived QoE</li>
+<li>Video measurements</li>
+</ul>
+<h2 id="Prior-Work-on-Data-Driven-Optimization-in-Networking"><a href="#Prior-Work-on-Data-Driven-Optimization-in-Networking" class="headerlink" title="Prior Work on Data-Driven Optimization in Networking"></a>Prior Work on Data-Driven Optimization in Networking</h2><ul>
+<li>Better Settings of Parameters: While these efforts are in entirely different areas, they have largely exploited the same inefficacy in traditional control logic that the parameters are<br>statically configured based on assumptions that are ill-matched with the dynamic workload in<br>runtime.Such problem can be fixed by dynamically training these parameters with recent measurements or synthetically simulated data.</li>
+<li>Better Run-Time Decisions: <ul>
+<li>In  other word, rather than inferring the underlying network states and finding best decisions analytically, it builds a model that directly associate quality feedback with decisions (configurations).  Research has shown that this more direct data-driven approach can improve the performance of  routing [181], TCP throughput [89], server selection in web performance [146], as well as bitrate  adaptation in video streaming [150]. (这不就机器学习吗)</li>
+<li>exploration-exploitation strategies (multi-armed techniques [215]), or Bayesian optimization<h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2></li>
+</ul>
+</li>
 <li>Expressions<ul>
 <li>it has become of paramount importance that …</li>
 <li>Despite the intense research towards better Internet QoE …</li>
 <li>We elaborate on these quality problems in Chapter 2.</li>
+<li>other details are omitted for clarity.</li>
+<li>leverage 利用</li>
+<li>well-provisioned  精心调配的</li>
+<li>our ultimate objective is to improve</li>
+<li>As we will see, our solution strikes a better balance between the visibility to user-perceived QoE and the visibility to network conditions through taking a more data-driven approach to endpoint solutions</li>
 </ul>
 </li>
 </ul>
@@ -568,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-about-DDN"><span class="nav-number">2.</span> <span class="nav-text">Introduction about DDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QoE"><span class="nav-number">3.</span> <span class="nav-text">QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">4.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-about-DDN"><span class="nav-number">2.</span> <span class="nav-text">Introduction about DDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QoE"><span class="nav-number">3.</span> <span class="nav-text">QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-Video"><span class="nav-number">4.</span> <span class="nav-text">Internet Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-Telephony"><span class="nav-number">5.</span> <span class="nav-text">Internet Telephony</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improve-QoE"><span class="nav-number">6.</span> <span class="nav-text">Improve QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluation-of-performance"><span class="nav-number">7.</span> <span class="nav-text">evaluation of performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prior-Work-on-Data-Driven-Optimization-in-Networking"><span class="nav-number">8.</span> <span class="nav-text">Prior Work on Data-Driven Optimization in Networking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">9.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
             
 
           </div>
