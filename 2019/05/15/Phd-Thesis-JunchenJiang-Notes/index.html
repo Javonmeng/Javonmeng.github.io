@@ -95,7 +95,7 @@
 <meta property="og:description" content="Abstract Keywords: Internet applications, Quality of Experience, Data-Driven Networking, user-perceived The key contribution of this dissertation is to bridge the long-standing gap between the visibil">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/05/15/Phd-Thesis-JunchenJiang-Notes/DDN1.PNG">
-<meta property="og:updated_time" content="2019-05-18T10:11:55.534Z">
+<meta property="og:updated_time" content="2019-05-28T14:05:48.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Phd_Thesis_JunchenJiang_Notes">
 <meta name="twitter:description" content="Abstract Keywords: Internet applications, Quality of Experience, Data-Driven Networking, user-perceived The key contribution of this dissertation is to bridge the long-standing gap between the visibil">
@@ -451,7 +451,230 @@
 <li>Better Settings of Parameters: While these efforts are in entirely different areas, they have largely exploited the same inefficacy in traditional control logic that the parameters are<br>statically configured based on assumptions that are ill-matched with the dynamic workload in<br>runtime.Such problem can be fixed by dynamically training these parameters with recent measurements or synthetically simulated data.</li>
 <li>Better Run-Time Decisions: <ul>
 <li>In  other word, rather than inferring the underlying network states and finding best decisions analytically, it builds a model that directly associate quality feedback with decisions (configurations).  Research has shown that this more direct data-driven approach can improve the performance of  routing [181], TCP throughput [89], server selection in web performance [146], as well as bitrate  adaptation in video streaming [150]. (这不就机器学习吗)</li>
-<li>exploration-exploitation strategies (multi-armed techniques [215]), or Bayesian optimization<h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2></li>
+<li>exploration-exploitation strategies (multi-armed techniques [215]), or Bayesian optimization</li>
+</ul>
+</li>
+</ul>
+<h2 id="Data-Driven-Network"><a href="#Data-Driven-Network" class="headerlink" title="Data-Driven Network"></a>Data-Driven Network</h2><ul>
+<li>Formalizing DDN<ul>
+<li>DDN is a new paradigm for designing the adaptation logic of end-to-end protocols (such as adaptive video streaming protocols)</li>
+<li>DDN-based control loop is driven by real-time multi-session (not single-session) view of in-situ quality [100] measurement (not active measurements or indirect metrics), and automatically tuned actuation algorithms based on data-driven insights (with little to no manual tuning).</li>
+<li>A DDN-enabled protocol has two additional components: (a) the client-side instrumentation code which runs inside client-side application to measure client-perceived quality of each session and applies decisions made by DDN; and (b) the DDN controller which runs two loosely coupled steps:(controller收集client的信息，controller做决定，client执行)<ul>
+<li>Aggregate quality measurement from client-side instrumentation into a global view of upto-date network conditions and some actionable insights.</li>
+<li>Make control decisions based on the actionable insights, and send them to client-side instrumentation for execution.</li>
+</ul>
+</li>
+<li>Application Level, Session Level</li>
+<li>Compared to prior work on data-driven optimization in networking<ul>
+<li>(1) The input data of DDN is much larger both in scale and scope, allowing DDN to learn a more accurately model of the network conditions and make more informed decisions. (多个session)</li>
+<li>(2) The input data of DDN is collected from concurrent and history sessions that have different session-level features (client-side, network-level, and server-side), so the DDN decision logic must take into account the potentially complex relationship between these session-level features and QoE.</li>
+</ul>
+</li>
+<li>Several early applications of DDN from prior work<ul>
+<li>CDN/bitrate selection for video: a DDN controller that maps a video session to the CDN<br>and bitrate that has the best quality on similar sessions</li>
+<li>Relay selection for Internet telephony: improvement on call quality by selecting optimal relay servers for each call</li>
+<li>Online service cluster selection： By measuring end-to-end quality from clients and dynamically modeling the workload of network paths and servers, it can select proxies that reduce mean latency by 60% and carry 2× more traffic, compared with a baseline that finds proxies by Anycast.</li>
+<li>File sharing: predict the throughput between a client and a server</li>
+</ul>
+</li>
+<li>Challenges for DDN<ul>
+<li>Need for Expressive Models<ul>
+<li>The algorithmic objective of DDN is to build a model that maps each session in the session-level feature space to the optimal decision in the decision space</li>
+<li>High-dimensional relationship between session-level features and QoE: <ul>
+<li>we observe a combinational effect where video QoE is affect by a specific combination of feature values, but does not appear to be correlated with any individual feature</li>
+<li>an accurate QoE prediction model must be expressive enough to capture all these spatial and temporal complexities.</li>
+</ul>
+</li>
+<li>Large decision spaces:  needs to find a good relay path for each VoIP call in a set of hundreds of relay points.</li>
+</ul>
+</li>
+<li>Need for Scalable Platforms<ul>
+<li>Global view vs. data freshness: 分布式的缺少global view，中心式的缺少对fresh data的考虑</li>
+<li>Near real-time predictive analytics、</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>How Intuitively Persistent Critical Structures Address the Challenges?<ul>
+<li>Reducing session-level feature spaces: The advantage of persistentcritical structures is that each session’s QoE only depends on by a few critical features (rather than all features).(怎么确定critical features成了另外一个问题)</li>
+<li>Reducing large decision spaces: reduce the decision set to a subset of most promising decisions which can be explore efficiently</li>
+<li>Decomposing the decision-making process: To make decisions for the sessions in a group, we can use a logic that runs in the same frontend cluster where their fresh data is collected, and that uses only the information of these similar sessions to make decisions. (backend分组，每组的frontend make desicion)</li>
+<li>Learning the persistent critical structures from data: 事实上是最难的</li>
+</ul>
+</li>
+<li>Making DDN Practical by Persistent Critical Structures (DDN一般的流程)<ul>
+<li>Critical Features Analysis：each video session has a small set of critical features that ultimately determines its video quality, and these critical features change much more slowly than video quality</li>
+<li>Group-Based Control:the clients that exhibit similar QoE behavior will have similar network-level features (e.g., same IP prefix), and thus their fresh data will likely be collected by the same frontend cluster</li>
+<li>Guided Exploration: the stability of promising relay choices: for each pair of caller AS and callee AS, there is a small and stable subset of relays that almost always contains the best relay.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Structural-Analysis-of-QoE-Problems"><a href="#Structural-Analysis-of-QoE-Problems" class="headerlink" title="Structural Analysis of QoE Problems"></a>Structural Analysis of QoE Problems</h2><ul>
+<li>In this chapter, we present empirical evidenceof these persistent critical structures by using a large-scale structural analysis on the video and VoIP QoE</li>
+<li>Internet Video<ul>
+<li>Methodology<ul>
+<li>Dataset: The dataset consists of client-side measurements of video quality from over 300 million sessions of 379 distinct content providers spanning diverse genres, both live and video-on-demand content, different content delivery platforms, different types of bitrate adaptation algorithms, and device/browser platforms</li>
+<li>Session-level features: ASN、CDN、Content provider (Site)、VoD or Live、Player type、Browser、Connection type(mobile/fixed wireless, DSL, fiber-to-home)</li>
+<li>Identifying problem sessions:join failures, buffering ratio, bitrate,  join time</li>
+<li>Identifying problem clusters</li>
+<li>Identifying critical clusters:</li>
+</ul>
+</li>
+<li>Temporal Patterns</li>
+<li>Spatial Patterns</li>
+</ul>
+</li>
+</ul>
+<h2 id="Predictive-QoE-Optimization-By-Critical-Feature-Analysis"><a href="#Predictive-QoE-Optimization-By-Critical-Feature-Analysis" class="headerlink" title="Predictive QoE Optimization By Critical Feature Analysis"></a>Predictive QoE Optimization By Critical Feature Analysis</h2><ul>
+<li>improves video QoE by formulating DDN as a prediction problem</li>
+<li>video quality can be substantially improved by optimally selecting the best CDN and bitrate for each video session</li>
+<li>Critical Feature Analytics</li>
+<li>Challenge<ul>
+<li>Challenge 1: Complex QoE-Determining Factors<ul>
+<li>High-dimensional relationship between video quality and session features</li>
+<li>Limitation of existing solutions</li>
+<li>Highly diverse structures of factors: The factors that affect video quality vary across different sessions. This means the prediction algorithm should be expressive enough to predict quality for different sessions using different prediction models.</li>
+</ul>
+</li>
+<li>Challenge 2: Fresh Updates<ul>
+<li>prediction error increases dramatically if the staleness exceeds 10 minutes</li>
+<li>The requirement to use the most recent measurements makes it infeasible to use computationally expensive models.</li>
+</ul>
+</li>
+<li>Overview of CFA Ideas<ul>
+<li>Baseline Prediction Algorithm<ul>
+<li>At a given time, video sessions having same value on every feature have similar video quality.</li>
+<li>In our dataset, more than 78% of sessions have no identical session (i.e.,matching on all features) within the last 5 minutes.</li>
+<li>Critical Features</li>
+<li>Each video session has a subset of critical features that ultimately determines its video quality.</li>
+<li>First, find the critical features of each session s, denoted as CriticalFeatures(s).</li>
+<li>Then, find similar sessions that match values with s on critical features CriticalFeatures(s) within a recent history of length ∆ (by default, 5 minutes).</li>
+<li>Finally, return some suitable estimate of the quality of these similar sessions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Design of CFA<ul>
+<li>Critical features tend to persist on long timescales of tens of minutes.</li>
+<li>Learning Critical Features<ul>
+<li>Persistence implies that critical features of a session are learnable from history</li>
+</ul>
+</li>
+<li>Using Fresh Updates<ul>
+<li>Persistence implies that critical features can be cached and reused over tens of  minutes.</li>
+<li>On the timescale of tens of minutes, we update the results of critical feature learning. Then, on a faster timescale of tens of seconds, we update quality estimation using fresh data and the most recently learned critical features.</li>
+<li>This decoupling minimizes the impact of staleness on prediction accuracy.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Implementation and Deployment<ul>
+<li>Centralized backend:<ul>
+<li>By default, critical feature learning runs every 30 minutes, and quality estimation runs every minute.</li>
+</ul>
+</li>
+<li>Distributed frontend<ul>
+<li>Real-time query/response and decision makers of CDN/bitrate are colocated in distributed frontend clusters that are closer to clients than the backend</li>
+<li>Each frontend cluster receives the quality function from the backend and caches it locally for fast prediction.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Relationship to existing ML techniques<ul>
+<li>Multi-armed bandit algorithms [215] find the decision with the highest reward (i.e., best CDN and bitrate) from multiple choices. </li>
+<li>The feature selection problem [106] seems similar to critical feature learning, but with a key difference: critical features vary across video sessions</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Cross-Session-Throughput-Prediction-for-Initial-Video-Bitrate-Selection-初始视频码率的选择"><a href="#Cross-Session-Throughput-Prediction-for-Initial-Video-Bitrate-Selection-初始视频码率的选择" class="headerlink" title="Cross-Session Throughput Prediction for Initial Video Bitrate Selection 初始视频码率的选择"></a>Cross-Session Throughput Prediction for Initial Video Bitrate Selection 初始视频码率的选择</h2><ul>
+<li>Backgroud<ul>
+<li>Existing approaches to initial bitrate selection, however, are inefficient</li>
+<li>A video player should ideally pick the highest initial bitrate that is sustainable</li>
+<li>Dataset<ul>
+<li>FCC dataset: This dataset consists of 9.9 million sessions and is collected from 6204 clients in US spanning 17 ISPs. </li>
+<li>Supplementary VoD dataset: 0.8 millions VoD sessions, collected by a major video content provider in China. 中国哪家的啊。。。都没看到怎么获取</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Design of DDA<ul>
+<li>Insight of DDA<ul>
+<li>DDA finds for a given session a prediction model between the Nearest Neighbor and Global prediction models, so that it strikes a balance between being closer to Nearest Neighbor for accuracy and being closer to Global for reliability</li>
+<li>Second, instead of mapping all sessions to the same prediction model, DDA maps different sessions to different prediction models.（“Nearest Neighbor” prediction model、“Global” prediction model、…）</li>
+</ul>
+</li>
+<li>Algorithm<ul>
+<li>Overall workflow<ul>
+<li>First, DDA learns a prediction model $M_s^*$ based on history data.</li>
+<li>Second, DDA estimates s’s throughput by the median throughput of sessions</li>
+</ul>
+</li>
+<li>Learning of prediction model<ul>
+<li>First, DDA learns a prediction model $M_s^*$ based on history data from a pool of all possible prediction models(这很大程度取决于你的model pool的选择)</li>
+<li>DDA takes a data-driven approach and finds the best prediction model over a set of history sessions Est(s) </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Improvement of Bitrate Selection</li>
+</ul>
+</li>
+</ul>
+<h2 id="Improving-QoE-via-Exploration-and-Exploitation-at-Scale"><a href="#Improving-QoE-via-Exploration-and-Exploitation-at-Scale" class="headerlink" title="Improving QoE via Exploration and Exploitation at Scale"></a>Improving QoE via Exploration and Exploitation at Scale</h2><ul>
+<li>data-driven QoE optimization should instead be cast as a real-time exploration and exploitation (E2) process rather than as a prediction problem. </li>
+<li>Pytheas</li>
+<li>Using an end-to-end implementation and a proof-of-concept deployment in CloudLab</li>
+<li>Limitations of Predictive Approaches<ul>
+<li>Limitation 1: Prediction Bias</li>
+<li>Limitation 2: Slow Reaction</li>
+</ul>
+</li>
+<li>Casting QoE Optimization as a Exploration-Exploitation Process<ul>
+<li>Note that the reward functions could change over time, and thus this is a continuous process rather than a one-time shot.</li>
+<li>Challenges of E2 in the Networking Context<ul>
+<li>need fresh measurements of all sessions, but getting such a fresh and global view is challenging</li>
+<li>Traditional E2 techniques also make strong assumptions about the context that affects the reward of a decisions, but they may not hold in network settings.</li>
+</ul>
+</li>
+<li>Overview of Pytheas <ul>
+<li>if two sessions share the context that determines their E2 decisions, they will be likely to match on some network-specific features.</li>
+<li>we group together sessions with similar context by network locality and other key features (such as device and location), and use one E2 process for each group.</li>
+<li>System overview<ul>
+<li>Each session group is managed by one per-group E2 process run by one frontend cluster</li>
+<li>When a session comes in, it sends a request for its control decisions, which includes its features, to the Pytheas system</li>
+<li>The request will be received by a frontend cluster, which maps the session to a group based on its features, then gets the most up-to-date decision from the local per-group E2 process, and returns the decision to the session</li>
+<li>Each session measures its QoE and reports it to the same frontend cluster. When this frontend receives the QoE measurement, it again maps the session to a group, and updates the E2 logic of the group with the new measurement.</li>
+</ul>
+</li>
+<li>Pytheas Algorithms<ul>
+<li>Session-Grouping Logic<ul>
+<li>sessions in the same group share not only the best decision, but also the factors that determine the best decisions.</li>
+<li>Given a session set, the session-grouping logic should output any non-overlapping partition of sessions</li>
+</ul>
+</li>
+<li>Per-Group E2 Logic<ul>
+<li>UCB (Upper Confidence Bound) algorithms [48] are a family of algorithms to solve the multi-armed bandits problem</li>
+</ul>
+</li>
+<li>First, each frontend cluster runs an active E2 algorithm rather than merely executing the (stale) prediction decisions as in prior work. </li>
+<li>Second, the frontend clusters now run per-group logic, not per-session logic.</li>
+<li>Frontends and Backends<ul>
+<li>Frontends: Pick one cluster as the leader cluster of this group and let it run the E2 logic of the group based on the measurements. Oher clusters, called proxy clusters of the group, receive decisions from the leader cluster. Proxy clustersforward QoE measurements to the leader cluster</li>
+<li>Backends: Updating Session Groups<ul>
+<li>the backend runs the session-grouping logic to decide which group each session belongs to, and outputs a session-to-group table</li>
+<li>we select the frontend cluster that receives most sessions in the group as the leader<h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Expressions<ul>
@@ -463,6 +686,10 @@
 <li>well-provisioned  精心调配的</li>
 <li>our ultimate objective is to improve</li>
 <li>As we will see, our solution strikes a better balance between the visibility to user-perceived QoE and the visibility to network conditions through taking a more data-driven approach to endpoint solutions</li>
+<li>dissertation 专题 The main contribution of this dissertation is …</li>
+<li>n essence, … 本质上</li>
+<li>a key domain-specific insight  that enables us to address both challenges in practice\</li>
+<li>As a concrete example, let us consider </li>
 </ul>
 </li>
 </ul>
@@ -636,7 +863,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-about-DDN"><span class="nav-number">2.</span> <span class="nav-text">Introduction about DDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QoE"><span class="nav-number">3.</span> <span class="nav-text">QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-Video"><span class="nav-number">4.</span> <span class="nav-text">Internet Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-Telephony"><span class="nav-number">5.</span> <span class="nav-text">Internet Telephony</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improve-QoE"><span class="nav-number">6.</span> <span class="nav-text">Improve QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluation-of-performance"><span class="nav-number">7.</span> <span class="nav-text">evaluation of performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prior-Work-on-Data-Driven-Optimization-in-Networking"><span class="nav-number">8.</span> <span class="nav-text">Prior Work on Data-Driven Optimization in Networking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">9.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-about-DDN"><span class="nav-number">2.</span> <span class="nav-text">Introduction about DDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QoE"><span class="nav-number">3.</span> <span class="nav-text">QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-Video"><span class="nav-number">4.</span> <span class="nav-text">Internet Video</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Internet-Telephony"><span class="nav-number">5.</span> <span class="nav-text">Internet Telephony</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improve-QoE"><span class="nav-number">6.</span> <span class="nav-text">Improve QoE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#evaluation-of-performance"><span class="nav-number">7.</span> <span class="nav-text">evaluation of performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prior-Work-on-Data-Driven-Optimization-in-Networking"><span class="nav-number">8.</span> <span class="nav-text">Prior Work on Data-Driven Optimization in Networking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Driven-Network"><span class="nav-number">9.</span> <span class="nav-text">Data-Driven Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structural-Analysis-of-QoE-Problems"><span class="nav-number">10.</span> <span class="nav-text">Structural Analysis of QoE Problems</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Predictive-QoE-Optimization-By-Critical-Feature-Analysis"><span class="nav-number">11.</span> <span class="nav-text">Predictive QoE Optimization By Critical Feature Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Session-Throughput-Prediction-for-Initial-Video-Bitrate-Selection-初始视频码率的选择"><span class="nav-number">12.</span> <span class="nav-text">Cross-Session Throughput Prediction for Initial Video Bitrate Selection 初始视频码率的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Improving-QoE-via-Exploration-and-Exploitation-at-Scale"><span class="nav-number">13.</span> <span class="nav-text">Improving QoE via Exploration and Exploitation at Scale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">14.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
             
 
           </div>
