@@ -44,6 +44,7 @@ categories: Papers
 ## Open issues
 - Tighter integration with client/server analytics stack
 - Leveraging insights from computer vision literature
+
 ## Expressions
 - ubiquitously available cameras 无所不在的摄像头
 - its high cost prohibits a scalable solution, especially ...prohibits阻止了
