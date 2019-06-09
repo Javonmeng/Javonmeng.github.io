@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="video analytics,server-driven,superposition coding,">
+  <meta name="keywords" content="video analytics,configuration,top-k,Persistent characteristics over time,Cross-camera similarities,Independence of configuration knobs,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Abstract in this paper, we call upon this community to similarly develop custom streaming protocols for better analytics quality (accuracy) of vision analytics (deep neural networks). We highlight new">
-<meta name="keywords" content="video analytics,server-driven,superposition coding">
+<meta name="description" content="Abstract to balance resource and accuracy by selecting a suitable NN configuration (e.g., the resolution and frame rate of the input video) We present Chameleon, a controller that dynamically picks th">
+<meta name="keywords" content="video analytics,configuration,top-k,Persistent characteristics over time,Cross-camera similarities,Independence of configuration knobs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Reinventing Video Streaming for Distributed Vision Analytics">
-<meta property="og:url" content="http://yoursite.com/2019/06/09/Reinventing-Video-Streaming-for-Distributed-Vision-Analytics/index.html">
+<meta property="og:title" content="Chameleon: Scalable Adaptation of Video Analytics">
+<meta property="og:url" content="http://yoursite.com/2019/06/09/Chameleon-Scalable-Adaptation-of-Video-Analytics/index.html">
 <meta property="og:site_name" content="Javon">
-<meta property="og:description" content="Abstract in this paper, we call upon this community to similarly develop custom streaming protocols for better analytics quality (accuracy) of vision analytics (deep neural networks). We highlight new">
+<meta property="og:description" content="Abstract to balance resource and accuracy by selecting a suitable NN configuration (e.g., the resolution and frame rate of the input video) We present Chameleon, a controller that dynamically picks th">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-09T10:07:57.573Z">
+<meta property="og:updated_time" content="2019-06-09T15:12:38.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Reinventing Video Streaming for Distributed Vision Analytics">
-<meta name="twitter:description" content="Abstract in this paper, we call upon this community to similarly develop custom streaming protocols for better analytics quality (accuracy) of vision analytics (deep neural networks). We highlight new">
+<meta name="twitter:title" content="Chameleon: Scalable Adaptation of Video Analytics">
+<meta name="twitter:description" content="Abstract to balance resource and accuracy by selecting a suitable NN configuration (e.g., the resolution and frame rate of the input video) We present Chameleon, a controller that dynamically picks th">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/09/Reinventing-Video-Streaming-for-Distributed-Vision-Analytics/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/09/Chameleon-Scalable-Adaptation-of-Video-Analytics/">
 
 
 
 
 
-  <title>Reinventing Video Streaming for Distributed Vision Analytics | Javon</title>
+  <title>Chameleon: Scalable Adaptation of Video Analytics | Javon</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/09/Reinventing-Video-Streaming-for-Distributed-Vision-Analytics/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/09/Chameleon-Scalable-Adaptation-of-Video-Analytics/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Javon">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Reinventing Video Streaming for Distributed Vision Analytics</h1>
+          <h1 class="post-title" itemprop="name headline">Chameleon: Scalable Adaptation of Video Analytics</h1>
         
 
         <div class="post-meta">
@@ -299,7 +299,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-09T18:02:59+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-09T23:09:30+08:00">
                 2019-06-09
               </time>
             
@@ -360,57 +360,121 @@
 
       
         <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>in this paper, we call upon this community to similarly develop custom streaming protocols for better analytics quality (accuracy) of vision analytics (deep neural networks).</li>
-<li>We highlight new opportunities to substantially improve the tradeoffs between bandwidth usage and inference accuracy</li>
-<li>the new protocols can directly optimize the inference accuracy while minimizing bandwidth usage</li>
+<li>to balance resource and accuracy by selecting a suitable NN configuration (e.g., the resolution and frame rate of the input video)</li>
+<li>We present Chameleon, a controller that dynamically picks the best configurations for existing NN-based video analytics pipelines.</li>
+<li>tradeoff: adapting configurations frequently can reduce resource consumption with little degradation in accuracy, but searching a large space of configurations periodically incurs an overwhelming resource overhead that negates the gains of adaptation.</li>
+<li>keywords: vedio analytics, DNN, object detection</li>
 </ul>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>Video analytics, in contrast, focus onlyon specific video segments with queried objects of interest. Thus, a streaming protocol is optimal as long as the frames with the queried objects of interest are sent at sufficiently high resolution.</li>
+<li>The pipeline has several “knobs” such as frame resolution, frame sampling rate, and detector model (e.g., Yolo, VGG or AlexNet). We refer to a particular combinations of knob values as a configuration.</li>
+<li>The “best” configuration is the one with the lowest resource demand whose accuracy is over a desired threshold</li>
+<li>While prior video analytics systems [16,32, 33] profile the processing pipeline to minimize cost, they only do so once, at the beginning of the video。忽略了内在的动态性</li>
+<li>In fact, in our early experiments, the cost of periodic profiling  often exceeded any resource savings gained by adapting the  configurations. The main challenge, thus, is to significantly  reduce the resource cost of periodic configuration profiling.</li>
+<li>leverages domain-specific insights on the temporal and spatial correlations of these configurations.</li>
+<li>Temporal correlation: <ul>
+<li>The top-k best configurations (cheapest k configurations with accuracy above the desired threshold) tend to be relatively stable over time, for a small value of k.</li>
+<li>configurations that are very bad—very inaccurate and/or very expensive— remain so over long time periods.</li>
+<li>we can significantly prune the search space during profiling by learning which configurations are promising and which are unhelpful.</li>
 </ul>
-<h2 id="What’s-new-about-video-streaming-in-vision-analytics"><a href="#What’s-new-about-video-streaming-in-vision-analytics" class="headerlink" title="What’s new about video streaming in vision analytics?"></a>What’s new about video streaming in vision analytics?</h2><ul>
-<li>the video needs to be streamed to cloud or edge servers (as shown in Figure 1) to offload the computationally intensive DNN-based vision tasks</li>
-<li>A video streaming protocol can be seen as a function that applies some compression operation p(·) (e.g., resolution downsizing and frame sampling) on the original video v, and sends the compressed video p(v) to the server.</li>
-<li>color changes in background trigger the client to send many frames while the actual objects of interest are static</li>
-<li>This client-driven workflow, however, suffers from the fundamental limitation that, without any input from the server, it is difficult to predict precisely what the server needs, i.e., how much information is needed to encode all objects of interest. </li>
+</li>
+<li>Cross-camera correlation:<ul>
+<li>Once we identify a good set of configurations for one video feed, we can reuse it on similar feeds</li>
 </ul>
-<h2 id="A-case-for-a-server-driven-approach"><a href="#A-case-for-a-server-driven-approach" class="headerlink" title="A case for a server-driven approach"></a>A case for a server-driven approach</h2><ul>
-<li>maximizes the analytics accuracy by giving the server full (or partial) control over what to send from the client to the server</li>
-<li>The oracle protocol (unrealistically) assumes that the server can access the original video and pick the optimal values for each of the control knobs–frame selection, area cropping, resolution, and compression level. That is, it selects the exact frames where the objects move, crops out only the spatial regions that contain objects, selects the minimal resolution at which the server-side logic can detect the object, etc.</li>
-<li>Challenge<ul>
-<li>the inference result on low-quality video (e.g., low resolution, low frame rate, or aggressive compression), while not accurate, is sufficient to reveal what additional information is needed by the NN model to achieve higher accuracy.<ul>
-<li>Inference results on low-resolution frames can indicate where objects are likely to appear</li>
-<li>Inference results on sparsely sampled frames can indicate which frames are likely to contain objects.</li>
+</li>
+<li>Independence of configurations:<ul>
+<li>for a given configuration  knob, the relationship between its resource and accuracy is  largely independent of the values of the other configuration  knobs.</li>
+</ul>
+</li>
+<li>Contributions<ul>
+<li>We do a cost-benefit analysis for continuously adapting NN configurations compared to one-time tuning</li>
+<li>We identify and quantify the impact of spatial and temporal correlations on resource-accuracy tradeoffs</li>
+<li>We present a suite of techniques to dramatically reduce the cost of periodic profiling by leveraging the spatial/temporal correlations.</li>
+</ul>
+</li>
+</ul>
+<h2 id="RECOURCE-ACCURACY-PROFILES"><a href="#RECOURCE-ACCURACY-PROFILES" class="headerlink" title="RECOURCE-ACCURACY PROFILES"></a>RECOURCE-ACCURACY PROFILES</h2><ul>
+<li>Object detection pipelines<ul>
+<li>Pipelines</li>
+<li>Configurations<ul>
+<li>Pipeline A has 150 configurations and Pipeline B has 20.</li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-<h2 id="Towards-a-practical-design"><a href="#Towards-a-practical-design" class="headerlink" title="Towards a practical design"></a>Towards a practical design</h2><ul>
-<li>Formalizing server-driven protocol<ul>
-<li>Iterative workflow using superposition coding<ul>
-<li>the client first sends a base-quality video (e.g., low resolution or frames sampled sparsely in time) to the server, and if the inference output is not confident, the server decides to get additional information so that it can recover higher-quality video by “adding” the new data to the base-quality video it already has.</li>
-<li>superposition coding</li>
+<li>Performance of configurations<ul>
+<li>Accuracy<ul>
+<li>we compute accuracy of a single frame by comparing the detected objects with the objects detected by the most expensive configuration, which we call the golden configuration, using the F1 score</li>
 </ul>
 </li>
-<li>Server-driven protocol as active learning<ul>
-<li>The workflow of a server-driven protocol closely resembles an active learning process </li>
-<li>Sending a video segment at a high resolution or a higher sampling rate to the server can be seen as labeling more bits in the region</li>
+<li>Cost<ul>
+<li>We use average GPU processing time (with 100% utilization) per frame as the metric of resource consumption</li>
+</ul>
+</li>
+<li>Performance impact</li>
+<li>we show that the relationship between configuration and accuracy has great temporal variability, so dynamically adapting the configuration can lead to better resource-accuracy tradeoffs</li>
+</ul>
+</li>
+<li>Prohibitive profiling cost<ul>
+<li>A sizable component of this profiling cost comes from running the golden configuration.</li>
+</ul>
+</li>
+<li>Challenges in reducing profiling cost<ul>
+<li>profiling cost includes the cost of running the golden configuration, which itself can be prohibitively expensive.</li>
+<li>simply increasing the update interval T does not help in practice.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>A concrete design and its early promise<ul>
-<li>SimpleProto, a simple server-driven protocol that achieves substantial improvement.</li>
+<h2 id="POTENTIAL-OF-ADAPTATION"><a href="#POTENTIAL-OF-ADAPTATION" class="headerlink" title="POTENTIAL OF ADAPTATION"></a>POTENTIAL OF ADAPTATION</h2><ul>
+<li>Quantifying potential<ul>
+<li>One-time update</li>
+<li>Periodic update</li>
 </ul>
 </li>
 </ul>
-<h2 id="Open-issues"><a href="#Open-issues" class="headerlink" title="Open issues"></a>Open issues</h2><ul>
-<li>Tighter integration with client/server analytics stack</li>
-<li>Leveraging insights from computer vision literature</li>
+<h2 id="KEY-IDEAS-INCHAMELEON"><a href="#KEY-IDEAS-INCHAMELEON" class="headerlink" title="KEY IDEAS INCHAMELEON"></a>KEY IDEAS INCHAMELEON</h2><ul>
+<li>if the NN configurations’ resource-accuracy tradeoff is affected by some persistent characteristics of the video, we can learn these temporal correlations to reuse configurations over time<ul>
+<li>More generally, even though the best configuration, i.e., the one with the lowest cost meeting the accuracy threshold α, might change frequently, the set of top-k best configurations (top-k cheapest configurations with accuracy ≥ α) tend to remain stable over time. Thus, we can dramatically reduce the search space by focusing on these top-k configurations.</li>
+</ul>
+</li>
+<li>if two video feeds share similar characteristics, it is likely they will also share the same best configurations. Such cross-camera correlations provide an opportunity to amortize profiling cost across multiple camera feeds<ul>
+<li>we can leverage the fact that similar videos tend to have similar distributions of best configurations. Then, we can use the most promising configurations from one camera—e.g., the top-k best configurations—to  guide the profiling of a spatially-related camera.</li>
+</ul>
+</li>
+<li>we have experimentally observed that many of the configuration knobs independently impact accuracy, allowing us to avoid an exponential search这点很重要啊 说明参数的独立性<ul>
+<li>it lets us tune the resolution knob independent of the frame rate; this prunes a large part of the configuration space</li>
+<li>it lets us estimate a configuration’s accuracy by combining its perknob accuracies; in particular, we can do this withoutrunning the expensive golden configuration.</li>
+</ul>
+</li>
+</ul>
+<h2 id="CHAMELEON-TECHNIQUES"><a href="#CHAMELEON-TECHNIQUES" class="headerlink" title="CHAMELEON TECHNIQUES"></a>CHAMELEON TECHNIQUES</h2><ul>
+<li>Overview<ul>
+<li>Chameleon uses a solution inspired by greedy hill climbing  that exploits the independence of NN configuration knobs  to reduce the search space from exponential to linear (§5.4).</li>
+<li>Using this profiling method, it leverages the temporal persistence of configurations to learn their properties over time and amortizes the cost of profiling across multiple cameras by leveraging cross-video similarities</li>
+</ul>
+</li>
+<li>Temporal incremental updates</li>
+<li>Cross-video inference<ul>
+<li>Grouping related videos</li>
+</ul>
+</li>
+<li>Profiling a video segment<ul>
+<li>Chameleon leverages the empirically-driven assumption from §4.3 that the knobs of our NN configurations can be treated independently.</li>
+<li>greedy hill climbing, where each knob is tuned while all other knobs are held fixed, reducing the search space from $n^m$ to O(mn).</li>
+<li>since our knobs exhibit monotonically increasing/decreasing performance, we can stop the loop when performance is good enough (or bad enough, depending on the search direction)</li>
+</ul>
+</li>
+</ul>
+<h2 id="EVALUATION"><a href="#EVALUATION" class="headerlink" title="EVALUATION"></a>EVALUATION</h2><ul>
+<li>dataset: a dataset of video streams from five traffic video cameras deployed in different intersections in a metropolitan area (Bellevue, WA).</li>
+</ul>
+<h2 id="FUTURE-WORK"><a href="#FUTURE-WORK" class="headerlink" title="FUTURE WORK"></a>FUTURE WORK</h2><ul>
+<li>Network bandwidth</li>
+<li>Profiling on the edge</li>
+<li>Triggering the profiling</li>
 </ul>
 <h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2><ul>
-<li>ubiquitously available cameras 无所不在的摄像头</li>
-<li>its high cost prohibits a scalable solution, especially …prohibits阻止了</li>
+<li>improving inference accuracy often requires a prohibitive cost in computational resources</li>
+<li>factory floor 工厂车间，工人工作的地方</li>
 </ul>
 
       
@@ -431,9 +495,15 @@
           
             <a href="/tags/video-analytics/" rel="tag"># video analytics</a>
           
-            <a href="/tags/server-driven/" rel="tag"># server-driven</a>
+            <a href="/tags/configuration/" rel="tag"># configuration</a>
           
-            <a href="/tags/superposition-coding/" rel="tag"># superposition coding</a>
+            <a href="/tags/top-k/" rel="tag"># top-k</a>
+          
+            <a href="/tags/Persistent-characteristics-over-time/" rel="tag"># Persistent characteristics over time</a>
+          
+            <a href="/tags/Cross-camera-similarities/" rel="tag"># Cross-camera similarities</a>
+          
+            <a href="/tags/Independence-of-configuration-knobs/" rel="tag"># Independence of configuration knobs</a>
           
         </div>
       
@@ -446,8 +516,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/09/BDS-A-Centralized-Near-Optimal-Overlay-Network-for-Inter-Datacenter-Data-Replication/" rel="next" title="BDS: A Centralized Near-Optimal Overlay Network for Inter-Datacenter Data Replication">
-                <i class="fa fa-chevron-left"></i> BDS: A Centralized Near-Optimal Overlay Network for Inter-Datacenter Data Replication
+              <a href="/2019/06/09/Reinventing-Video-Streaming-for-Distributed-Vision-Analytics/" rel="next" title="Reinventing Video Streaming for Distributed Vision Analytics">
+                <i class="fa fa-chevron-left"></i> Reinventing Video Streaming for Distributed Vision Analytics
               </a>
             
           </div>
@@ -455,10 +525,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/09/Chameleon-Scalable-Adaptation-of-Video-Analytics/" rel="prev" title="Chameleon: Scalable Adaptation of Video Analytics">
-                Chameleon: Scalable Adaptation of Video Analytics <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -590,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What’s-new-about-video-streaming-in-vision-analytics"><span class="nav-number">3.</span> <span class="nav-text">What’s new about video streaming in vision analytics?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-case-for-a-server-driven-approach"><span class="nav-number">4.</span> <span class="nav-text">A case for a server-driven approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Towards-a-practical-design"><span class="nav-number">5.</span> <span class="nav-text">Towards a practical design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-issues"><span class="nav-number">6.</span> <span class="nav-text">Open issues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">7.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RECOURCE-ACCURACY-PROFILES"><span class="nav-number">3.</span> <span class="nav-text">RECOURCE-ACCURACY PROFILES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POTENTIAL-OF-ADAPTATION"><span class="nav-number">4.</span> <span class="nav-text">POTENTIAL OF ADAPTATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KEY-IDEAS-INCHAMELEON"><span class="nav-number">5.</span> <span class="nav-text">KEY IDEAS INCHAMELEON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CHAMELEON-TECHNIQUES"><span class="nav-number">6.</span> <span class="nav-text">CHAMELEON TECHNIQUES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EVALUATION"><span class="nav-number">7.</span> <span class="nav-text">EVALUATION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FUTURE-WORK"><span class="nav-number">8.</span> <span class="nav-text">FUTURE WORK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">9.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
             
 
           </div>
