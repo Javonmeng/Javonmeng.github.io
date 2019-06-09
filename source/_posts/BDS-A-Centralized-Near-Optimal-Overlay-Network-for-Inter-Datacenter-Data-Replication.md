@@ -75,6 +75,9 @@ that if two overlay paths have different end-to-end throughput at the same time,
 - Data Transfer and Rate Control
 - Centralized Traffic Engineering
 
+## ideas
+- 中继的选择
+- 速率的选择
 ## Expressions
 - amount to 10% of ...
 - in a fraction of second 零点几秒
