@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="命令行,">
+  <meta name="keywords" content="DNN in networking,interpretability,domin-specific knowledge,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="#流程12345678git pullhexo new post &amp;quot;article&amp;quot;git add .git commit -m &amp;quot;add a post&amp;quot;git pushhexo d -g">
-<meta name="keywords" content="命令行">
+<meta name="description" content="Abstract The problem of model opacity would eventually impede the adoption of DNN-based solutions in practice we call upon this community to similarly develop techniques and leverage domain-specific i">
+<meta name="keywords" content="DNN in networking,interpretability,domin-specific knowledge">
 <meta property="og:type" content="article">
-<meta property="og:title" content="final test">
-<meta property="og:url" content="http://yoursite.com/2019/05/13/final-test/index.html">
+<meta property="og:title" content="Demystifying Deep Learning in Networking">
+<meta property="og:url" content="http://yoursite.com/2019/06/10/Demystifying-Deep-Learning-in-Networking/index.html">
 <meta property="og:site_name" content="Javon">
-<meta property="og:description" content="#流程12345678git pullhexo new post &amp;quot;article&amp;quot;git add .git commit -m &amp;quot;add a post&amp;quot;git pushhexo d -g">
+<meta property="og:description" content="Abstract The problem of model opacity would eventually impede the adoption of DNN-based solutions in practice we call upon this community to similarly develop techniques and leverage domain-specific i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-14T13:00:44.547Z">
+<meta property="og:updated_time" content="2019-06-10T02:40:56.127Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="final test">
-<meta name="twitter:description" content="#流程12345678git pullhexo new post &amp;quot;article&amp;quot;git add .git commit -m &amp;quot;add a post&amp;quot;git pushhexo d -g">
+<meta name="twitter:title" content="Demystifying Deep Learning in Networking">
+<meta name="twitter:description" content="Abstract The problem of model opacity would eventually impede the adoption of DNN-based solutions in practice we call upon this community to similarly develop techniques and leverage domain-specific i">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/13/final-test/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/10/Demystifying-Deep-Learning-in-Networking/">
 
 
 
 
 
-  <title>final test | Javon</title>
+  <title>Demystifying Deep Learning in Networking | Javon</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/final-test/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/Demystifying-Deep-Learning-in-Networking/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Javon">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">final test</h1>
+          <h1 class="post-title" itemprop="name headline">Demystifying Deep Learning in Networking</h1>
         
 
         <div class="post-meta">
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-13T16:32:48+08:00">
-                2019-05-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T10:39:20+08:00">
+                2019-06-10
               </time>
             
 
@@ -322,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/教程/" itemprop="url" rel="index">
-                    <span itemprop="name">教程</span>
+                  <a href="/categories/Papers/" itemprop="url" rel="index">
+                    <span itemprop="name">Papers</span>
                   </a>
                 </span>
 
@@ -359,7 +359,94 @@
       
 
       
-        <p>#流程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br><span class="line">hexo new post &quot;article&quot;</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;add a post&quot;</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">hexo d -g</span><br></pre></td></tr></table></figure></p>
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>The problem of model opacity would eventually <em>impede the adoption of</em> DNN-based solutions <em>in practice</em></li>
+<li>we call upon this community to similarly develop techniques and leverage domain-specific insights to demystify the DNNs trained in networking settings, and ultimately unleash the potential of DNNs in an explainable and reliable way</li>
+<li>Neural networks, Resource allocation, Interpretability</li>
+</ul>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Studies from academia and industry have shown remarkably promising improvements by DNN-based solutions (e.g., deep reinforcement learning) in a variety of classic problems, such as cloud resource allocation [10], end-to-end video adaptation [11], routing [17], wireless bandwidth allocation [18], and so forth</li>
+<li>The inability to  understand these deep models lies at the root of a multitude of concerns; e.g., it is difficult to completely trust the  model will perform well in new environments, to debug  why a wrong decision was made, and to defend it against  adversarial manipulation.</li>
+<li>key aspect of DNNs for networking<ul>
+<li>How is a decision made?</li>
+<li>When will it fail?</li>
+<li>Can domain-specific insight be integrated?</li>
+</ul>
+</li>
+</ul>
+<h2 id="WHY-IS-INTERPRETABILITY-CRUCIAL"><a href="#WHY-IS-INTERPRETABILITY-CRUCIAL" class="headerlink" title="WHY IS INTERPRETABILITY CRUCIAL?"></a>WHY IS INTERPRETABILITY CRUCIAL?</h2><ul>
+<li>Early promises of DNNs<ul>
+<li>Each problem is formulated as a  reinforcement learning process, in which the key step is to  use a DNN to map an input “state” to a probability distribution over “actions”. Each action triggers a reward (e.g., job  slowdown), and the DNN updates its parameters to maximize expected reward until they converge</li>
+</ul>
+</li>
+<li>Concerns of treating DNNs as blackboxes<ul>
+<li>Hard to confer causality</li>
+<li>Hard to trust</li>
+<li>Incompatible with domain-specific knowledge<ul>
+<li>the opacity of DNNs makes incorporating domain-specific knowledge difficult. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="WHY-DNN-MAKES-THE-DECISION？"><a href="#WHY-DNN-MAKES-THE-DECISION？" class="headerlink" title="WHY DNN MAKES THE DECISION？"></a>WHY DNN MAKES THE DECISION？</h2><ul>
+<li>Important features<ul>
+<li>The input  of a DNN often includes all features that might be useful  in the decision-making</li>
+<li>To reveal what features a DNN depends on, a popular  technique is to use saliency map [15], which is a heatmap  showing how much impact of each input feature on the  output</li>
+<li>When a DNN comprises convolutional layers,  the Grad-CAM [14] method can be employed to generate  the saliency map.</li>
+<li>So if the resource demand  of a job is labeled dark red (or blue) in the saliency map, it  means increasing the resource demand of that job will greatly  increase (or reduce) the chance of making the same decision</li>
+</ul>
+</li>
+<li>From input to high-level features<ul>
+<li>Maximally activating intermediate neurons:</li>
+<li>(In)distinguishable input<ul>
+<li>In contrast, by examining the intermediate neurons, we  can actually explain correlation by DNN works internally:  the intermediate neurons are only activated when the job  size is over or below certain thresholds, i.e., the neurons  effectively act as a “filter” of job size. Such interpretation is  more generalizable and reliable</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Research thrusts<ul>
+<li>domain knowledge is needed   </li>
+<li>it is indeed plausible to test domain-specific hypothesis by visualizing/interpreting features and high-level representations of DNNs used in networking/systems settings.</li>
+</ul>
+</li>
+</ul>
+<h2 id="WILL-IT-FAIL-MISERABLY"><a href="#WILL-IT-FAIL-MISERABLY" class="headerlink" title="WILL IT FAIL MISERABLY"></a>WILL IT FAIL MISERABLY</h2><ul>
+<li>Adversarial input states<ul>
+<li>the generated input state needs to be meaningful</li>
+</ul>
+</li>
+<li>Heterogeneous environments<ul>
+<li>In contrast, machine learning-based algorithms can  optimize performance for workloads drawn from the same  distribution as the training data, but for the algorithm to carry over to a different environment requires the additional transferability</li>
+<li>a DNN can fail miserably when  tested against data draw from an unseen distribution, even  when it is simple enough to be handled by simpler alternative models</li>
+</ul>
+</li>
+<li>Research thrusts</li>
+</ul>
+<h2 id="MACHINE-GENERATED-ALGORITHMS-TO-RULE-IT-ALL"><a href="#MACHINE-GENERATED-ALGORITHMS-TO-RULE-IT-ALL" class="headerlink" title="MACHINE-GENERATED ALGORITHMS TO RULE IT ALL?"></a>MACHINE-GENERATED ALGORITHMS TO RULE IT ALL?</h2><ul>
+<li>Integrating domain knowledge is the key<ul>
+<li>Better transferability</li>
+<li>Better robustness</li>
+<li>Better training efficiency</li>
+</ul>
+</li>
+<li>Regulating DNNs with domain knowledge<ul>
+<li>The basic idea is to use two processes, called “teacher” and “student”, to regulate the training of a DNN f with a domain-specific logic g</li>
+<li>Both f and g take input x and output a probability distribution y over the action space</li>
+<li>“student” trains f such that it minimizes the difference to the ground truth as well as the difference to the output of g.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2><ul>
+<li>The problem of model opacity would eventually <em>impede the adoption of</em> DNN-based solutions <em>in practice</em></li>
+<li>is incompatible with opaque models like DNNs不透明的模型</li>
+<li>which could otherwise achieve the best of both worlds</li>
+<li>causality因果关系</li>
+<li>Without a proper understanding of the causality, we will not be able to trust if DNN works the same way we believe it does</li>
+<li>rule-based models</li>
+<li>is amenable to 经得起检验的</li>
+<li>most techniques are derived from the <em>aforementioned</em> formulation.</li>
+</ul>
 
       
     </div>
@@ -377,7 +464,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/命令行/" rel="tag"># 命令行</a>
+            <a href="/tags/DNN-in-networking/" rel="tag"># DNN in networking</a>
+          
+            <a href="/tags/interpretability/" rel="tag"># interpretability</a>
+          
+            <a href="/tags/domin-specific-knowledge/" rel="tag"># domin-specific knowledge</a>
           
         </div>
       
@@ -390,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/13/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/06/09/Chameleon-Scalable-Adaptation-of-Video-Analytics/" rel="next" title="Chameleon: Scalable Adaptation of Video Analytics">
+                <i class="fa fa-chevron-left"></i> Chameleon: Scalable Adaptation of Video Analytics
               </a>
             
           </div>
@@ -399,10 +490,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/14/VIA-：Improving-Internet-Telephony-Call-Quality-Using-Predictive-Relay-Selection/" rel="prev" title="VIA ：Improving Internet Telephony Call Quality Using  Predictive Relay Selection">
-                VIA ：Improving Internet Telephony Call Quality Using  Predictive Relay Selection <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -454,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -515,6 +611,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHY-IS-INTERPRETABILITY-CRUCIAL"><span class="nav-number">3.</span> <span class="nav-text">WHY IS INTERPRETABILITY CRUCIAL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHY-DNN-MAKES-THE-DECISION？"><span class="nav-number">4.</span> <span class="nav-text">WHY DNN MAKES THE DECISION？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WILL-IT-FAIL-MISERABLY"><span class="nav-number">5.</span> <span class="nav-text">WILL IT FAIL MISERABLY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MACHINE-GENERATED-ALGORITHMS-TO-RULE-IT-ALL"><span class="nav-number">6.</span> <span class="nav-text">MACHINE-GENERATED ALGORITHMS TO RULE IT ALL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">7.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
