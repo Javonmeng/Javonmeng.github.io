@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="DNN in networking,interpretability,domin-specific knowledge,">
+  <meta name="keywords" content="Video,Multipath,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Abstract The problem of model opacity would eventually impede the adoption of DNN-based solutions in practice we call upon this community to similarly develop techniques and leverage domain-specific i">
-<meta name="keywords" content="DNN in networking,interpretability,domin-specific knowledge">
+<meta name="description" content="Video transmission via MultipathCross-Layer Scheduler for Video Streaming over MPTCPAbstract Our objective is to maximize the amount of video data that is received in time at the client Keyword:  Pack">
+<meta name="keywords" content="Video,Multipath">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Demystifying Deep Learning in Networking">
-<meta property="og:url" content="http://yoursite.com/2019/06/10/Demystifying-Deep-Learning-in-Networking/index.html">
+<meta property="og:title" content="Video Transmission via Multipath">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/Video-Transmission-via-Multipath/index.html">
 <meta property="og:site_name" content="WELCOME">
-<meta property="og:description" content="Abstract The problem of model opacity would eventually impede the adoption of DNN-based solutions in practice we call upon this community to similarly develop techniques and leverage domain-specific i">
+<meta property="og:description" content="Video transmission via MultipathCross-Layer Scheduler for Video Streaming over MPTCPAbstract Our objective is to maximize the amount of video data that is received in time at the client Keyword:  Pack">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-10T02:40:56.127Z">
+<meta property="og:updated_time" content="2019-06-20T07:28:35.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Demystifying Deep Learning in Networking">
-<meta name="twitter:description" content="Abstract The problem of model opacity would eventually impede the adoption of DNN-based solutions in practice we call upon this community to similarly develop techniques and leverage domain-specific i">
+<meta name="twitter:title" content="Video Transmission via Multipath">
+<meta name="twitter:description" content="Video transmission via MultipathCross-Layer Scheduler for Video Streaming over MPTCPAbstract Our objective is to maximize the amount of video data that is received in time at the client Keyword:  Pack">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/10/Demystifying-Deep-Learning-in-Networking/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/20/Video-Transmission-via-Multipath/">
 
 
 
 
 
-  <title>Demystifying Deep Learning in Networking | WELCOME</title>
+  <title>Video Transmission via Multipath | WELCOME</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/Demystifying-Deep-Learning-in-Networking/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/Video-Transmission-via-Multipath/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Javon">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Demystifying Deep Learning in Networking</h1>
+          <h1 class="post-title" itemprop="name headline">Video Transmission via Multipath</h1>
         
 
         <div class="post-meta">
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-10T10:39:20+08:00">
-                2019-06-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T15:25:19+08:00">
+                2019-06-20
               </time>
             
 
@@ -359,93 +359,84 @@
       
 
       
-        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>The problem of model opacity would eventually <em>impede the adoption of</em> DNN-based solutions <em>in practice</em></li>
-<li>we call upon this community to similarly develop techniques and leverage domain-specific insights to demystify the DNNs trained in networking settings, and ultimately unleash the potential of DNNs in an explainable and reliable way</li>
-<li>Neural networks, Resource allocation, Interpretability</li>
+        <h1 id="Video-transmission-via-Multipath"><a href="#Video-transmission-via-Multipath" class="headerlink" title="Video transmission via Multipath"></a>Video transmission via Multipath</h1><h2 id="Cross-Layer-Scheduler-for-Video-Streaming-over-MPTCP"><a href="#Cross-Layer-Scheduler-for-Video-Streaming-over-MPTCP" class="headerlink" title="Cross-Layer Scheduler for Video Streaming over MPTCP"></a>Cross-Layer Scheduler for Video Streaming over MPTCP</h2><h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><ul>
+<li>Our objective is to maximize the amount of video data that is received in time at the client</li>
+<li>Keyword:  Packet scheduling, Cross-Layer Scheduler</li>
 </ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
-<li>Studies from academia and industry have shown remarkably promising improvements by DNN-based solutions (e.g., deep reinforcement learning) in a variety of classic problems, such as cloud resource allocation [10], end-to-end video adaptation [11], routing [17], wireless bandwidth allocation [18], and so forth</li>
-<li>The inability to  understand these deep models lies at the root of a multitude of concerns; e.g., it is difficult to completely trust the  model will perform well in new environments, to debug  why a wrong decision was made, and to defend it against  adversarial manipulation.</li>
-<li>key aspect of DNNs for networking<ul>
-<li>How is a decision made?</li>
-<li>When will it fail?</li>
-<li>Can domain-specific insight be integrated?</li>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ul>
+<li>MPTCP is expected to enable quicker and more stable communication by concurrently exploiting several network paths</li>
+<li>head-of-line 排头阻塞 出现在缓存式通信网络交换中的一种现象,这就如同你在只有一条行车路线的马路上右转，但你前面有直行车，虽然这时右行线已经空闲，但你也只能等待。</li>
+<li>We focus on the multipath streaming of a video.</li>
+<li>Our objective is to increase the quality of experience (QoE) of the viewers by maximizing the reception of decodable video data in difficult conditions (video bit-rate close to the available bandwidth and small application buffer).</li>
+<li>Our proposal applies to both live and on-demand services</li>
+<li>Contributions<ul>
+<li>cross-layer scheduler<ul>
+<li>leverages information from both application and transport layers</li>
+</ul>
+</li>
+<li>theoretical analysis<ul>
+<li>Integer Linear Program </li>
+</ul>
+</li>
+<li>These traces in dataset include the timestamps of both sending and arrival times of each packet in each path.</li>
+<li>video-aware</li>
 </ul>
 </li>
 </ul>
-<h2 id="WHY-IS-INTERPRETABILITY-CRUCIAL"><a href="#WHY-IS-INTERPRETABILITY-CRUCIAL" class="headerlink" title="WHY IS INTERPRETABILITY CRUCIAL?"></a>WHY IS INTERPRETABILITY CRUCIAL?</h2><ul>
-<li>Early promises of DNNs<ul>
-<li>Each problem is formulated as a  reinforcement learning process, in which the key step is to  use a DNN to map an input “state” to a probability distribution over “actions”. Each action triggers a reward (e.g., job  slowdown), and the DNN updates its parameters to maximize expected reward until they converge</li>
+<h3 id="Backgroud"><a href="#Backgroud" class="headerlink" title="Backgroud"></a>Backgroud</h3><h4 id="Multi-Path-Networking"><a href="#Multi-Path-Networking" class="headerlink" title="Multi-Path Networking"></a>Multi-Path Networking</h4><ul>
+<li>Application Sending Buffer</li>
+<li>Multi-Path Sending Buffer</li>
+<li>TCP Sending Buffer</li>
+<li>Receiving Buffer<ul>
+<li>MPTCP implements only one  receiving buffer, which gets all incoming packets from all  subflows before the delivery to the application.</li>
 </ul>
 </li>
-<li>Concerns of treating DNNs as blackboxes<ul>
-<li>Hard to confer causality</li>
-<li>Hard to trust</li>
-<li>Incompatible with domain-specific knowledge<ul>
-<li>the opacity of DNNs makes incorporating domain-specific knowledge difficult. </li>
+<li>Application Receiving Buffer</li>
+<li>The recent research activities related to  multi-path transport protocols, such as Concurrent  Multipath Transfer SCTP (CMT-SCTP) or MPTCP, have  dealt with the scheduling of packets at the Multi-Path  Sending Buffer (which packets to send to which TCP  Sending Buffer) [2, 22, 25] and the management of  retransmission in case of packet losses</li>
+<li>CMT-SCTP features the same coupled congestion control as  MPTCP (Opportunistic Linked-Increases Algorithm  (OLIA) [20, 26]) but it has no default options, so parameter  setting is hard, and it suffers from deployment issue since  it is based on SCTP</li>
+</ul>
+<h4 id="Multimedia-Stream-Structure"><a href="#Multimedia-Stream-Structure" class="headerlink" title="Multimedia Stream Structure"></a>Multimedia Stream Structure</h4><ul>
+<li>The bit-stream  is cut into frames, which have temporal dependencies with  regards to their types: Intra (I), Predicted (P) or  Bidirectional (B) pictures</li>
+</ul>
+<h4 id="Existing-Work-on-Carrying-out-Video-Through-Multiple-Paths"><a href="#Existing-Work-on-Carrying-out-Video-Through-Multiple-Paths" class="headerlink" title="Existing Work on Carrying out Video Through Multiple Paths"></a>Existing Work on Carrying out Video Through Multiple Paths</h4><ul>
+<li>In the multimedia  community, papers have mostly focused on the application  level (a seminal work is [19]). </li>
+<li>In the network community, a  research axis is to deal with streaming in specific wireless  environment (for example [8]). </li>
+<li>Our paper is between these  approaches (without any assumption on the physical layer).</li>
+<li>The scheduler is identified as one key component driving  the performance of MPTCP [4] but some other approaches  have also been considered.</li>
+<li>These proposals are in line with  the services the TAPS working group at the IETF aim to  provide: smart interactions between the multi-path  transport and the video generation to improve QoE.</li>
+</ul>
+<h3 id="Video-content-aware-scheduler-over-MPTCP"><a href="#Video-content-aware-scheduler-over-MPTCP" class="headerlink" title="Video-content aware scheduler over MPTCP"></a>Video-content aware scheduler over MPTCP</h3><ul>
+<li>Particularly, data are transmitted from the  MPTCP Sending Buffer in the same order as they arrived  to this buffer, even if some data should no longer be sent,  for example an obsolete video unit whose playback deadline  has already expired. Such an event is likely to occur in  transport protocols that guarantee in-order delivery, such  as TCP and MPTCP because the loss of one data packet  can delay the delivery of multiple following packets.</li>
+</ul>
+<h3 id="Passing-Information-between-the-Different-Layers"><a href="#Passing-Information-between-the-Different-Layers" class="headerlink" title="Passing Information between the Different Layers"></a>Passing Information between the Different Layers</h3><ul>
+<li>Video content awareness<ul>
+<li>The cross-layer layer knows all those  dependencies and so is able to infer whether the client can  decode a video unit at a specific time or not. Each video  unit is associated with a specific video frame (even for  tiles)</li>
 </ul>
 </li>
+<li>Network awareness<ul>
+<li>The cross-layer scheduler knows the  status of the network, including the smoothed Round-Trip  Time (sRTT), the global moving average bandwidth and  the loss probability of each path</li>
+<li>With the sRTT, the  cross-layer scheduler can estimate the arrival time of each  packets, and choose to send a video unit close to its  deadline on the path with the shortest sRTT.</li>
+<li>From the  moving average bandwidth, the scheduler can choose to  drop some less important video units to favor others. </li>
+<li>From  the loss probability, it can choose to send highly important  video units on the path with the smallest loss probability</li>
+<li>the cross-layer scheduler needs to  implement a feedback loop from the MPTCP socket.  Although such feedback does not exist in open-source  implementations yet, the development is not challenging  since the server hosts both the MPTCP implementation  and the application.</li>
 </ul>
 </li>
-</ul>
-<h2 id="WHY-DNN-MAKES-THE-DECISION？"><a href="#WHY-DNN-MAKES-THE-DECISION？" class="headerlink" title="WHY DNN MAKES THE DECISION？"></a>WHY DNN MAKES THE DECISION？</h2><ul>
-<li>Important features<ul>
-<li>The input  of a DNN often includes all features that might be useful  in the decision-making</li>
-<li>To reveal what features a DNN depends on, a popular  technique is to use saliency map [15], which is a heatmap  showing how much impact of each input feature on the  output</li>
-<li>When a DNN comprises convolutional layers,  the Grad-CAM [14] method can be employed to generate  the saliency map.</li>
-<li>So if the resource demand  of a job is labeled dark red (or blue) in the saliency map, it  means increasing the resource demand of that job will greatly  increase (or reduce) the chance of making the same decision</li>
+<li>Application awareness<ul>
+<li>The cross-layer scheduler knows the  status of the video player on the client. It can estimate the  lag at the client side. </li>
+<li>From the lag, the start  timestamp and the POC, the cross-layer scheduler can  estimate the deadline of each video unit.</li>
+<li>The client can add extra information in its HTTP requests or use Real-Time  Transport Control Protocol (RTCP) to implement this  feedback in practice. The lag is a fixed value, which can be  communicated to the server. The hardest thing is to  estimate the timestamp when the client starts playing the  decoded video.</li>
 </ul>
 </li>
-<li>From input to high-level features<ul>
-<li>Maximally activating intermediate neurons:</li>
-<li>(In)distinguishable input<ul>
-<li>In contrast, by examining the intermediate neurons, we  can actually explain correlation by DNN works internally:  the intermediate neurons are only activated when the job  size is over or below certain thresholds, i.e., the neurons  effectively act as a “filter” of job size. Such interpretation is  more generalizable and reliable</li>
+<li>Algorithm<ul>
+<li>The goal of our algorithm is to prioritize the video units that are the most likely to be received in time</li>
+<li>The crosslayer scheduler is content-aware (it knows how to extract  video units) and application-aware (it is able to estimate  their playback deadline from an applicative feedback loop).  It is also network-aware (it knows which path the MPTCP  stack selects to send the next packet as well as the sRTT of  this path)</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Research thrusts<ul>
-<li>domain knowledge is needed   </li>
-<li>it is indeed plausible to test domain-specific hypothesis by visualizing/interpreting features and high-level representations of DNNs used in networking/systems settings.</li>
-</ul>
-</li>
-</ul>
-<h2 id="WILL-IT-FAIL-MISERABLY"><a href="#WILL-IT-FAIL-MISERABLY" class="headerlink" title="WILL IT FAIL MISERABLY"></a>WILL IT FAIL MISERABLY</h2><ul>
-<li>Adversarial input states<ul>
-<li>the generated input state needs to be meaningful</li>
-</ul>
-</li>
-<li>Heterogeneous environments<ul>
-<li>In contrast, machine learning-based algorithms can  optimize performance for workloads drawn from the same  distribution as the training data, but for the algorithm to carry over to a different environment requires the additional transferability</li>
-<li>a DNN can fail miserably when  tested against data draw from an unseen distribution, even  when it is simple enough to be handled by simpler alternative models</li>
-</ul>
-</li>
-<li>Research thrusts</li>
-</ul>
-<h2 id="MACHINE-GENERATED-ALGORITHMS-TO-RULE-IT-ALL"><a href="#MACHINE-GENERATED-ALGORITHMS-TO-RULE-IT-ALL" class="headerlink" title="MACHINE-GENERATED ALGORITHMS TO RULE IT ALL?"></a>MACHINE-GENERATED ALGORITHMS TO RULE IT ALL?</h2><ul>
-<li>Integrating domain knowledge is the key<ul>
-<li>Better transferability</li>
-<li>Better robustness</li>
-<li>Better training efficiency</li>
-</ul>
-</li>
-<li>Regulating DNNs with domain knowledge<ul>
-<li>The basic idea is to use two processes, called “teacher” and “student”, to regulate the training of a DNN f with a domain-specific logic g</li>
-<li>Both f and g take input x and output a probability distribution y over the action space</li>
-<li>“student” trains f such that it minimizes the difference to the ground truth as well as the difference to the output of g.</li>
-</ul>
-</li>
+<li><h3 id="MPTCP-DATASET"><a href="#MPTCP-DATASET" class="headerlink" title="MPTCP DATASET"></a>MPTCP DATASET</h3></li>
+<li>for each packet, the transmission  timestamp, the reception timestamp, the size of the  payload and the path on which this packet has been  carried.</li>
 </ul>
 <h2 id="Expressions"><a href="#Expressions" class="headerlink" title="Expressions"></a>Expressions</h2><ul>
-<li>The problem of model opacity would eventually <em>impede the adoption of</em> DNN-based solutions <em>in practice</em></li>
-<li>is incompatible with opaque models like DNNs不透明的模型</li>
-<li>which could otherwise achieve the best of both worlds</li>
-<li>causality因果关系</li>
-<li>Without a proper understanding of the causality, we will not be able to trust if DNN works the same way we believe it does</li>
-<li>rule-based models</li>
-<li>is amenable to 经得起检验的</li>
-<li>most techniques are derived from the <em>aforementioned</em> formulation.</li>
+<li>The term video unit can <em>be interpreted as either frame or tile</em></li>
 </ul>
 
       
@@ -464,11 +455,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DNN-in-networking/" rel="tag"># DNN in networking</a>
+            <a href="/tags/Video/" rel="tag"># Video</a>
           
-            <a href="/tags/interpretability/" rel="tag"># interpretability</a>
-          
-            <a href="/tags/domin-specific-knowledge/" rel="tag"># domin-specific knowledge</a>
+            <a href="/tags/Multipath/" rel="tag"># Multipath</a>
           
         </div>
       
@@ -481,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/09/Chameleon-Scalable-Adaptation-of-Video-Analytics/" rel="next" title="Chameleon: Scalable Adaptation of Video Analytics">
-                <i class="fa fa-chevron-left"></i> Chameleon: Scalable Adaptation of Video Analytics
+              <a href="/2019/06/11/a-summary-of-recent-4-blogs-of-paper/" rel="next" title="a summary of recent 4 blogs of paper">
+                <i class="fa fa-chevron-left"></i> a summary of recent 4 blogs of paper
               </a>
             
           </div>
@@ -490,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/11/a-summary-of-recent-4-blogs-of-paper/" rel="prev" title="a summary of recent 4 blogs of paper">
-                a summary of recent 4 blogs of paper <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHY-IS-INTERPRETABILITY-CRUCIAL"><span class="nav-number">3.</span> <span class="nav-text">WHY IS INTERPRETABILITY CRUCIAL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WHY-DNN-MAKES-THE-DECISION？"><span class="nav-number">4.</span> <span class="nav-text">WHY DNN MAKES THE DECISION？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WILL-IT-FAIL-MISERABLY"><span class="nav-number">5.</span> <span class="nav-text">WILL IT FAIL MISERABLY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MACHINE-GENERATED-ALGORITHMS-TO-RULE-IT-ALL"><span class="nav-number">6.</span> <span class="nav-text">MACHINE-GENERATED ALGORITHMS TO RULE IT ALL?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">7.</span> <span class="nav-text">Expressions</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Video-transmission-via-Multipath"><span class="nav-number">1.</span> <span class="nav-text">Video transmission via Multipath</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Layer-Scheduler-for-Video-Streaming-over-MPTCP"><span class="nav-number">1.1.</span> <span class="nav-text">Cross-Layer Scheduler for Video Streaming over MPTCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backgroud"><span class="nav-number">1.1.3.</span> <span class="nav-text">Backgroud</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-Path-Networking"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Multi-Path Networking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multimedia-Stream-Structure"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Multimedia Stream Structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Existing-Work-on-Carrying-out-Video-Through-Multiple-Paths"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">Existing Work on Carrying out Video Through Multiple Paths</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-content-aware-scheduler-over-MPTCP"><span class="nav-number">1.1.4.</span> <span class="nav-text">Video-content aware scheduler over MPTCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Passing-Information-between-the-Different-Layers"><span class="nav-number">1.1.5.</span> <span class="nav-text">Passing Information between the Different Layers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MPTCP-DATASET"><span class="nav-number">1.1.6.</span> <span class="nav-text">MPTCP DATASET</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Expressions"><span class="nav-number">1.2.</span> <span class="nav-text">Expressions</span></a></li></ol></li></ol></div>
             
 
           </div>
