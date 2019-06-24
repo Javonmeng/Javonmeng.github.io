@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/rick-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rick-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rick-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Multipath,RL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Reinforcement Learning  and MultipathA Reinforcement Learning Approach for Multipath TCP Data SchedulingAbstract the performance of MPTCP is seriously affected by the path environment In  order to sol">
+<meta name="keywords" content="Multipath,RL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reinforcement Learning  and Multipath">
+<meta property="og:url" content="http://yoursite.com/2019/06/24/Reinforcement-Learning-and-Multipath/index.html">
+<meta property="og:site_name" content="WELCOME">
+<meta property="og:description" content="Reinforcement Learning  and MultipathA Reinforcement Learning Approach for Multipath TCP Data SchedulingAbstract the performance of MPTCP is seriously affected by the path environment In  order to sol">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-24T06:41:55.196Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reinforcement Learning  and Multipath">
+<meta name="twitter:description" content="Reinforcement Learning  and MultipathA Reinforcement Learning Approach for Multipath TCP Data SchedulingAbstract the performance of MPTCP is seriously affected by the path environment In  order to sol">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/24/Reinforcement-Learning-and-Multipath/">
+
+
+
+
+
+  <title>Reinforcement Learning  and Multipath | WELCOME</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WELCOME</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/24/Reinforcement-Learning-and-Multipath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Javon">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WELCOME">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Reinforcement Learning  and Multipath</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-24T14:40:43+08:00">
+                2019-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Papers/" itemprop="url" rel="index">
+                    <span itemprop="name">Papers</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Reinforcement-Learning-and-Multipath"><a href="#Reinforcement-Learning-and-Multipath" class="headerlink" title="Reinforcement Learning  and Multipath"></a>Reinforcement Learning  and Multipath</h1><h2 id="A-Reinforcement-Learning-Approach-for-Multipath-TCP-Data-Scheduling"><a href="#A-Reinforcement-Learning-Approach-for-Multipath-TCP-Data-Scheduling" class="headerlink" title="A Reinforcement Learning Approach for Multipath TCP Data Scheduling"></a>A Reinforcement Learning Approach for Multipath TCP Data Scheduling</h2><h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><ul>
+<li>the performance of MPTCP is seriously affected by the path environment</li>
+<li>In  order to solve this problem, we propose a new data scheduling  algorithm based on reinforcement learning(RL) with the newly  introduced Deep Q Network (DQN) framework to enhance the  MPTCP data scheduling performance in the asymmetric path.  </li>
+<li>The reinforcement learning algorithm gets the information of  every path and adaptively choose the most suitable path by  the artificial intelligence.</li>
+</ul>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><ul>
+<li>For instance, paths have huge differences in the round-trip time(RTT), bandwidth resources which may cause a serious decline in performance because the disordered data will fill buffer if the packet cannot deliver to the in time under the limitation of resources in sender and receiver.</li>
+<li>in this paper, we assume  the data scheduling problem and the path selection problem  can be formulated as a MDP problem which can be calculated  as the reinforcement learning problem.</li>
+</ul>
+<h2 id="ReLeS-A-Neural-Adaptive-Multipath-Scheduler-based-on-DRL"><a href="#ReLeS-A-Neural-Adaptive-Multipath-Scheduler-based-on-DRL" class="headerlink" title="ReLeS: A Neural Adaptive Multipath Scheduler based on DRL"></a>ReLeS: A Neural Adaptive Multipath Scheduler based on DRL</h2><h3 id="Abstract-1"><a href="#Abstract-1" class="headerlink" title="Abstract"></a>Abstract</h3><ul>
+<li>ReLeS  uses modern deep reinforcement learning (DRL) techniques  to learn a neural network to generate the control policy for  packet scheduling. </li>
+<li>It adopts a comprehensive reward function  that takes diverse QoS characteristics into consideration to  optimize packet scheduling. </li>
+<li>To support real-time scheduling,  we propose an asynchronous training algorithm that enables  parallel execution of packet scheduling, data collecting, and  neural network training. </li>
+<li>We implement ReLeS in the Linux  kernel and evaluate it over both emulated and real network  conditions.</li>
+</ul>
+<h3 id="Introduction-1"><a href="#Introduction-1" class="headerlink" title="Introduction"></a>Introduction</h3><ul>
+<li>Packet scheduling is a unique and fundamental mechanism for the design and implementation of MPTCP.<ul>
+<li>A scheduler is  responsible for determining the amount of data packets to be  distributed onto the subflows, which has a significant impact  on the performance of MPTCP</li>
+</ul>
+</li>
+<li>head-of-line blocking</li>
+<li>related work<ul>
+<li>The ReMP scheduler [12] duplicates  packets over all subflows in exchange for reliability</li>
+<li>MinRTT, the  default scheduler of MPTCP, attempts to fill the congestion  window of the subflow with the lowest RTT before advancing  to other subflows</li>
+<li>BLEST  [13], a blocking estimation based scheduler, which takes a  proactive stand towards minimising HoL-blocking</li>
+<li><strong>The DEMS  scheduler [14] aims at reducing the data chunk download time  over multiple paths, whose benefits are maximized when the  file size is small or medium</strong></li>
+</ul>
+</li>
+<li>In this paper<ul>
+<li>To support online scheduling, the model training process runs offline using the real network traces and updates the online scheduler iteratively. </li>
+<li>To speedup the training process, we further introduce an asynchronous deep reinforcement learning algorithm that decouples data collection and model training to enable parallel execution of packet scheduling, data collecting, and neural network training.</li>
+</ul>
+</li>
+<li>Challenges<ul>
+<li>Multipath packet scheduling should take network heterogeneity (e.g., delay and capacity) into consideration in order to effectively leverage multipath scenarios. </li>
+<li>Packet scheduling algorithms must balance a variety of QoS goals such as maximizing average throughput, reducing the overall data transfer time, minimizing self-inflicted latency or out-of-order buffer size, and maintaining jitter smoothness</li>
+<li>Multipath scheduler should adapt to the dynamic of network environments.</li>
+</ul>
+</li>
+</ul>
+<h3 id="PROBLEM-DESCRIPTION-AND-SOLUTION-FRAMEWORK"><a href="#PROBLEM-DESCRIPTION-AND-SOLUTION-FRAMEWORK" class="headerlink" title="PROBLEM DESCRIPTION AND SOLUTION FRAMEWORK"></a>PROBLEM DESCRIPTION AND SOLUTION FRAMEWORK</h3><h4 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h4><ul>
+<li>A typical value of SI (scheduling intervals) is 200ms, which is about 3∼4 RTTs</li>
+<li>An episode is defined as the duration of an MPTCP connection, starting from the initiation of the MPTCP session until its teardown, which may contain several SIs.</li>
+<li>The scheduler’s goal is to find the best set of split ratios (p1, p2, ··· , pn) for the subflows that lead to the optimal performance</li>
+</ul>
+<h4 id="Solution-Framework"><a href="#Solution-Framework" class="headerlink" title="Solution Framework"></a>Solution Framework</h4><ul>
+<li>Online scheduling:</li>
+<li>Offline training:</li>
+<li>The online scheduling and offline training process run  asynchronously and iteratively. After each episode the trainer  synchronizes the scheduler with the trained neural network in  adaption to the environment changes, driving the scheduling  policy towards the optimum</li>
+</ul>
+<h3 id="Training-Algorithm"><a href="#Training-Algorithm" class="headerlink" title="Training Algorithm"></a>Training Algorithm</h3><h4 id="The-deep-reinforcement-learning-task"><a href="#The-deep-reinforcement-learning-task" class="headerlink" title="The deep reinforcement learning task"></a>The deep reinforcement learning task</h4><ul>
+<li>State, At the beginning of each SI, the agent observes the system state<ul>
+<li>Assume in the <em>t</em>-th SI, the system state is represented by $s_t=(s_{t,1},s_{t,2},…,s_{t,n})$, where $s_{t,i}$ is the observed state of the i-th subflow which can be represented by a tuple $s_{t, i}=\left(x_{t, i}, w_{t, i}, d_{t, i}, u_{t, i}, v_{t, i}\right)$.</li>
+<li>$x_{t,i}$ is the subflow throughput measurement in SI t</li>
+<li>$w_{t,i}$ is the average congestion window sizes in SI t</li>
+<li>$d_{t,i}$ is the subflow mean RTT in SI t</li>
+<li>$u_{t,i}$ is the number of unacked packets in SI t</li>
+<li>$v_{t,i}$ is the number of retransmitted packets in SI t</li>
+</ul>
+</li>
+<li>Action<ul>
+<li>an action is a scheduling decision, which determines how to distribute the current traffic over multiple paths</li>
+</ul>
+</li>
+<li>Policy</li>
+<li>Reward<ul>
+<li>After applying the action, the state of the environment transitions to st+1 and the agent receives a reward by taking the action.</li>
+<li>A reward function is used to evaluate the long-term performance of MPTCP by for a particular packet scheduling policy.<h4 id="Reward-Function"><a href="#Reward-Function" class="headerlink" title="Reward Function"></a>Reward Function</h4></li>
+</ul>
+</li>
+<li>$R\left(s_{t}, a_{t}\right)=V_{t}^{\text { throughput }}-\alpha V_{t}^{\mathrm{RTT}}-\beta V_{t}^{\text { lost }}$lling</li>
+</ul>
+<h4 id="Asynchronous-Training-Algorithm"><a href="#Asynchronous-Training-Algorithm" class="headerlink" title="Asynchronous Training Algorithm"></a>Asynchronous Training Algorithm</h4><ul>
+<li>asynchronous training algorithm, which decouples data collection and model learning<br>to enable parallel execution of real-time scheduling and neural network training.</li>
+<li>Normalized Advantage Function (NAF) [18] framework<ul>
+<li>LSTM.  extract features <ul>
+<li>With LSTM, ReLeS can incorporate a large  amount of network measurement history into its state space to  capture the temporal feature of actual network characteristics.</li>
+</ul>
+</li>
+<li>Softmax is used for the final layer activation function in the neural network to form a probability expression of the packet scheduling policy.</li>
+</ul>
+</li>
+<li>The asynchronous learning algorithm is summarized in  Algorithm 1. The trainer thread takes samples from the  replay buffer to update the deep neural network Q-function  approximator using stochastic gradient descent. This thread  runs on a central server, and dispatches updated neural network  parameters to the scheduler thread. The collector thread run  on the MPTCP connection sender, and sends the observation,  action, and reward in each SI to the central server to append  to the replay buffer.</li>
+<li>asynchronously<ul>
+<li>The trainer keeps training the neural network using the recent experience from the replay buffer</li>
+<li>the scheduler/collector executes packet scheduling actions on the sender side</li>
+<li>synchronizes its neural network parameters with the trainer iteratively, and pushes the experience into the shared replay buffer.</li>
+</ul>
+</li>
+<li>While $y_t$ is also dependent on $\theta^Q$, directly implementing  Q-learning (Eq. 5) with neural network has been proved to  be unstable in many environments<ul>
+<li>Because the network Q(s, a|$\theta^Q$) being updated is also used in calculating the target<br>value $y_t$, the Q update is prone to divergence.</li>
+</ul>
+</li>
+</ul>
+<h3 id="SYSTEM-DESIGN-AND-IMPLEMENTATION"><a href="#SYSTEM-DESIGN-AND-IMPLEMENTATION" class="headerlink" title="SYSTEM DESIGN AND IMPLEMENTATION"></a>SYSTEM DESIGN AND IMPLEMENTATION</h3><ul>
+<li>At the sender, the chunk data coming from the application (APP) is  stored in the meta buffer, and is then fetched, split, scheduled,  and transmitted by the MPTCP scheduler. </li>
+<li>The policy network  generates actions that determine the split ratio of each subflow  for packet scheduling. </li>
+<li>The network states, actions, and rewards  in each SI are passed to the collector and stored in a  replay buffer, which will be used by the trainer to train the  reinforcement learning model and update the policy network.  </li>
+<li>The receiver side logic is much simpler. As shown in Fig. 5,  it passively receives or acknowledges the data, reassembles it  in the receiver-side meta buffer, and delivers the in-order data  to the APP.</li>
+<li><strong>In the implementation of the system, it requires interaction between the kernel and userspace</strong></li>
+<li>getsockopt( ) setsockopt( )</li>
+</ul>
+<h3 id="PERFORMANCE-EVALUATION"><a href="#PERFORMANCE-EVALUATION" class="headerlink" title="PERFORMANCE EVALUATION"></a>PERFORMANCE EVALUATION</h3><ul>
+<li>we implement ReLeS, BLEST [13], and DEMS (the basic DEMS that does not perform reinjection) [14] in the Linux kernel base on MPTCP v0.92</li>
+<li>For emulation, we use Linux tc to throttle the bandwidth and to add extra delay on the sender.</li>
+<li>Linux操作系统中的流量控制器TC（Traffic Control）用于Linux内核的流量控制，主要是通过在输出端口处建立一个队列来实现流量控制。Linux操作系统中的流量控制器TC（Traffic Control）用于Linux内核的流量控制，主要是通过在输出端口处建立一个队列来实现流量控制。</li>
+<li>We consider different downloading files sizes varying from 64KB to 256MB to test the performance of the schedulers under different traffic classes.</li>
+<li>Performance Metrics<ul>
+<li>Application goodput</li>
+<li>Application delay</li>
+<li>OFO queue</li>
+<li>Download time</li>
+</ul>
+</li>
+<li>finally make further evaluation under real-world settings</li>
+<li>Performance Analysis<ul>
+<li>Taking MinRTT as  a baseline, the outperformance ratio is defined as the ratio  of the number of episodes where ReLeS’s download time  is smaller than MinRTT to the total number of episodes</li>
+<li>Additionally, increasing the number of collectors makes it converge significantly faster</li>
+<li>The training time  is within 0.2 hour for 104 updates, which is efficient. The data  collecting consumes much more time than the neural network  training, thus, we can achieve significant speedup in overall  training time from simultaneously collecting experience across  multiple collectors</li>
+<li>Performance under real-world settings (five locations)<ul>
+<li>office, library, supermarket, dormitory and canteen</li>
+<li>Google Nexus 5 smartphone - Android 4.4, based on MPTCP v0.86.x</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><ul>
+<li>Two widely used scheduling algorithms in MPTCP are MinRTT (default) and Round-Robin, which are simple and heuristic</li>
+<li>ReMP sends the duplicated data to all subflows to improve reliability in the cost of high redundancy[12]</li>
+<li>Frommgen et al. [28] proposed a programming model for MPTCP scheduling. </li>
+<li>Guo et al. [14] developed theoretical analyses to show that having all subflows complete at the same time at the receiver side is a necessary condition for achieving the optimal  performance and proposed DEMS</li>
+<li>ReLeS is a learning-based and experience-driven multipath scheduling approach which is self-adaptive to various kinds of network environments<h2 id="Epressions"><a href="#Epressions" class="headerlink" title="Epressions"></a>Epressions</h2></li>
+<li>many efforts have been made in this research [3] put forward</li>
+<li>what is more, </li>
+<li>is prone to divergence</li>
+<li>Different from the existing solutions, the proposed ReLeS is</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Multipath/" rel="tag"># Multipath</a>
+          
+            <a href="/tags/RL/" rel="tag"># RL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/20/Video-Transmission-via-Multipath/" rel="next" title="Video Transmission via Multipath">
+                <i class="fa fa-chevron-left"></i> Video Transmission via Multipath
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Javon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reinforcement-Learning-and-Multipath"><span class="nav-number">1.</span> <span class="nav-text">Reinforcement Learning  and Multipath</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Reinforcement-Learning-Approach-for-Multipath-TCP-Data-Scheduling"><span class="nav-number">1.1.</span> <span class="nav-text">A Reinforcement Learning Approach for Multipath TCP Data Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.1.2.</span> <span class="nav-text">Introduction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLeS-A-Neural-Adaptive-Multipath-Scheduler-based-on-DRL"><span class="nav-number">1.2.</span> <span class="nav-text">ReLeS: A Neural Adaptive Multipath Scheduler based on DRL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PROBLEM-DESCRIPTION-AND-SOLUTION-FRAMEWORK"><span class="nav-number">1.2.3.</span> <span class="nav-text">PROBLEM DESCRIPTION AND SOLUTION FRAMEWORK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-Description"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-Framework"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">Solution Framework</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-Algorithm"><span class="nav-number">1.2.4.</span> <span class="nav-text">Training Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#The-deep-reinforcement-learning-task"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">The deep reinforcement learning task</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reward-Function"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">Reward Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Asynchronous-Training-Algorithm"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">Asynchronous Training Algorithm</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SYSTEM-DESIGN-AND-IMPLEMENTATION"><span class="nav-number">1.2.5.</span> <span class="nav-text">SYSTEM DESIGN AND IMPLEMENTATION</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PERFORMANCE-EVALUATION"><span class="nav-number">1.2.6.</span> <span class="nav-text">PERFORMANCE EVALUATION</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Related-Work"><span class="nav-number">1.2.7.</span> <span class="nav-text">Related Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Epressions"><span class="nav-number">1.3.</span> <span class="nav-text">Epressions</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Javon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
