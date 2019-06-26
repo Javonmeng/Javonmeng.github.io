@@ -18,6 +18,18 @@ categories: Papers
 ### Introduction
 - For instance, paths have huge differences in the round-trip time(RTT), bandwidth resources which may cause a serious decline in performance because the disordered data will fill buffer if the packet cannot deliver to the in time under the limitation of resources in sender and receiver.
 - in this paper, we assume  the data scheduling problem and the path selection problem  can be formulated as a MDP problem which can be calculated  as the reinforcement learning problem.
+- But they all do not consider the transmission from the global perspective that the device can learn from the environment of the path with the help of reinforcement learning.
+### RL Model
+- we use the sending window as the state of agent and the path as the action, so the value function is based on the sending window, the reward and the action.
+- The aim is to optimize path selection to improve the transmission efficiency, and the model needs the information of state, action, and reward to make the decision
+- We define the reward and punishment to  impact to path selection. 
+  - First, if we receive the acknowledgement of successful transmission from the chosen path, there  will be a positive 1 reward for this path, but if we can not  receive the acknowledgement, no matter the acknowledgement  is lost or the data transmission is not finished in deadline, we  will punish this path by getting the reward as -1. 
+  - what is more, if the path is not available now, it will also get the punishment
+- We represent the process of reinforcement learning as a MDP which states are independent
+
+### Performance Evaluation
+- The simulation is build on the famous Network Simulator version 3(NS3) with the newly added MPTCP module [13]
+- the simulation is established under the heterogeneous condition to simulate asymmetrical networks. 
 
 ## ReLeS: A Neural Adaptive Multipath Scheduler based on DRL
 
@@ -72,8 +84,9 @@ categories: Papers
 - Reward
   - After applying the action, the state of the environment transitions to st+1 and the agent receives a reward by taking the action.
   - A reward function is used to evaluate the long-term performance of MPTCP by for a particular packet scheduling policy.
+
 #### Reward Function
-- $R\left(s_{t}, a_{t}\right)=V_{t}^{\text { throughput }}-\alpha V_{t}^{\mathrm{RTT}}-\beta V_{t}^{\text { lost }}$lling
+- $R\left(s_{t}, a_{t}\right)=V_{t}^{\text { throughput }}-\alpha V_{t}^{\mathrm{RTT}}-\beta V_{t}^{\text { lost }}$
 
 #### Asynchronous Training Algorithm
 - asynchronous training algorithm, which decouples data collection and model learning
@@ -124,6 +137,7 @@ value $y_t$, the Q update is prone to divergence.
 -  Frommgen et al. [28] proposed a programming model for MPTCP scheduling. 
 -  Guo et al. [14] developed theoretical analyses to show that having all subflows complete at the same time at the receiver side is a necessary condition for achieving the optimal  performance and proposed DEMS
 -  ReLeS is a learning-based and experience-driven multipath scheduling approach which is self-adaptive to various kinds of network environments
+
 ## Epressions
 - many efforts have been made in this research [3] put forward
 - what is more, 
