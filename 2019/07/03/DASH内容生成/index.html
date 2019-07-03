@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="WELCOME">
 <meta property="og:description" content="示例中big_buck_bunny的不同分辨率设置 https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd 254 kbps 320x180507 kbps 320x180759 kbps 480x2701013 kbps 640x3601254 kbps 640x3601883 kbps 768x4323134 kbps 1024x57">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-03T15:09:53.099Z">
+<meta property="og:updated_time" content="2019-07-03T15:16:53.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DASH内容生成">
 <meta name="twitter:description" content="示例中big_buck_bunny的不同分辨率设置 https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd 254 kbps 320x180507 kbps 320x180759 kbps 480x2701013 kbps 640x3601254 kbps 640x3601883 kbps 768x4323134 kbps 1024x57">
@@ -420,8 +420,8 @@
 <p>centos服务器安装ffmpeg<br><a href="https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/" target="_blank" rel="noopener">https://linuxize.com/post/how-to-install-ffmpeg-on-centos-7/</a><br>centos服务器安装gpac<br>sudo yum install gpac</p>
 <p>转码<br>ffmpeg -i big_buck_bunny_1080p_stereo.avi -s 3840x2160  -c:v libx264 -b:v 15000k -g 24 -an big_buck_bunny_3840x2160_15000k.mp4</p>
 <p>切片到dash</p>
-<p>windows下<br>mp4box -dash 2000 -frag 2000 -rap -frag-rap -profile dashavc264:live -segment-name Video$RepresentationID$\segment -mpd-title Joker -out manifest.mpd big_buck_bunny_320x180_250k.mp4 big_buck_bunny_320x180_500k.mp4 big_buck_bunny_480x270_750k.mp4 big_buck_bunny_640x360_1000k.mp4 big_buck_bunny_640x360_1250k.mp4 big_buck_bunny_768x432_2000k.mp4 big_buck_bunny_1024x576_3000k.mp4 big_buck_bunny_1280x720_5000k.mp4 big_buck_bunny_1920x1080_10000k.mp4 big_buck_bunny_3840x2160_15000k.mp4 </p>
-<p>centos下：(不能用 原因是centos中gpac版本低，RepresentationID是视频名，与最新版本不同)<br>MP4Box -dash 2000 -frag 2000 -rap -frag-rap -profile dashavc264:live -segment-name Video$RepresentationID$/segment -mpd-title Joker -out manifest.mpd big_buck_bunny_320x180_250k.mp4 big_buck_bunny_320x180_500k.mp4 big_buck_bunny_480x270_750k.mp4 big_buck_bunny_640x360_1000k.mp4 big_buck_bunny_640x360_1250k.mp4 big_buck_bunny_768x432_2000k.mp4 big_buck_bunny_1024x576_3000k.mp4 big_buck_bunny_1280x720_5000k.mp4 big_buck_bunny_1920x1080_10000k.mp4 big_buck_bunny_3840x2160_15000k.mp4 </p>
+<p>windows下<br>mp4box -dash 2000 -frag 2000 -rap -frag-rap -profile dashavc264:live -segment-name Video\$RepresentationID\$\segment -mpd-title Joker -out manifest.mpd big_buck_bunny_320x180_250k.mp4 big_buck_bunny_320x180_500k.mp4 big_buck_bunny_480x270_750k.mp4 big_buck_bunny_640x360_1000k.mp4 big_buck_bunny_640x360_1250k.mp4 big_buck_bunny_768x432_2000k.mp4 big_buck_bunny_1024x576_3000k.mp4 big_buck_bunny_1280x720_5000k.mp4 big_buck_bunny_1920x1080_10000k.mp4 big_buck_bunny_3840x2160_15000k.mp4 </p>
+<p>centos下：(不能用 原因是centos中gpac版本低，RepresentationID是视频名，与最新版本不同)<br>MP4Box -dash 2000 -frag 2000 -rap -frag-rap -profile dashavc264:live -segment-name Video\$RepresentationID\$/segment -mpd-title Joker -out manifest.mpd big_buck_bunny_320x180_250k.mp4 big_buck_bunny_320x180_500k.mp4 big_buck_bunny_480x270_750k.mp4 big_buck_bunny_640x360_1000k.mp4 big_buck_bunny_640x360_1250k.mp4 big_buck_bunny_768x432_2000k.mp4 big_buck_bunny_1024x576_3000k.mp4 big_buck_bunny_1280x720_5000k.mp4 big_buck_bunny_1920x1080_10000k.mp4 big_buck_bunny_3840x2160_15000k.mp4 </p>
 
       
     </div>
