@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="WELCOME">
 <meta property="og:description" content="示例中big_buck_bunny的不同分辨率设置 https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd 254 kbps 320x180507 kbps 320x180759 kbps 480x2701013 kbps 640x3601254 kbps 640x3601883 kbps 768x4323134 kbps 1024x57">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-08T13:59:52.393Z">
+<meta property="og:updated_time" content="2019-07-12T07:28:33.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DASH内容生成">
 <meta name="twitter:description" content="示例中big_buck_bunny的不同分辨率设置 https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd 254 kbps 320x180507 kbps 320x180759 kbps 480x2701013 kbps 640x3601254 kbps 640x3601883 kbps 768x4323134 kbps 1024x57">
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.1k
                 </span>
               
 
@@ -455,6 +455,10 @@
 <p>Probably you captured on the host that transmitted the oversized packet, and TCP Large Segment Offload is enabled. (Sometimes abbreviated TSO and sometimes LSO.) The operating system is passing packets larger than MTU to the network adapter, and the network adapter driver is breaking them up so that they fit within the MTU. If you capture from the wire, instead of from an endpoint involved in the communication, you will see that the packets are correctly sized when they are transmitted. This is one reason of several to capture from the wire, instead of on an endpoint.</p>
 <p>可能是您在传输超大数据包的主机上捕获，并启用了TCP大段卸载。 （有时缩写为TSO，有时缩写为LSO。）操作系统将大于MTU的数据包传递给网络适配器，网络适配器驱动程序将它们分解，以便它们适合MTU。 如果从线路捕获，而不是从通信中涉及的端点捕获，您将看到数据包在传输时的大小正确。 这是几个从线路捕获而不是在端点上捕获的原因之一。</p>
 <p>Enable or Disable TSO on a Linux Virtual Machine<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ethtool -K ethY tso on</span><br><span class="line"></span><br><span class="line">ethtool -K ethY tso off</span><br></pre></td></tr></table></figure></p>
+<p>时间同步服务器设置<br><a href="http://www.xitongzhijia.net/xtjc/20170822/105357.html" target="_blank" rel="noopener">win 10 解决办法</a></p>
+<p>centos<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate ntp.sjtu.edu.cn &amp;&amp; hwclock -w</span><br></pre></td></tr></table></figure></p>
+<p>hwclock -w命令是将系统时间，写入BOIS</p>
+<p>如果出现the NTP socketis in use, exiting<br>解决办法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service ntp stop</span><br><span class="line">ntpdate ntp.sjtu.edu.cn &amp;&amp; hwclock -w</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
