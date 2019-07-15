@@ -203,3 +203,8 @@ hwclock -w命令是将系统时间，写入BOIS
 service ntp stop
 ntpdate ntp.sjtu.edu.cn && hwclock -w
 ```
+
+杀死tcp connection 
+```
+tcpkill -9 host 114.214.166.200
+```
