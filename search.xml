@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[test2]]></title>
+    <url>%2F2020%2F07%2F13%2Ftest2%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[test1]]></title>
     <url>%2F2020%2F07%2F13%2Ftest1%2F</url>
     <content type="text"></content>
@@ -38,8 +43,8 @@
         <category>Papers</category>
       </categories>
       <tags>
-        <tag>Multipath</tag>
         <tag>DASH</tag>
+        <tag>Multipath</tag>
         <tag>DRL</tag>
         <tag>user-perceived QoE</tag>
       </tags>
