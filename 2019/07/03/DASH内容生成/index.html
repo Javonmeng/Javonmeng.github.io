@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="WELCOME">
 <meta property="og:description" content="示例中big_buck_bunny的不同分辨率设置 https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd 254 kbps 320x180507 kbps 320x180759 kbps 480x2701013 kbps 640x3601254 kbps 640x3601883 kbps 768x4323134 kbps 1024x57">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-12T07:28:33.848Z">
+<meta property="og:updated_time" content="2020-07-13T09:58:51.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DASH内容生成">
 <meta name="twitter:description" content="示例中big_buck_bunny的不同分辨率设置 https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd 254 kbps 320x180507 kbps 320x180759 kbps 480x2701013 kbps 640x3601254 kbps 640x3601883 kbps 768x4323134 kbps 1024x57">
@@ -459,6 +459,7 @@
 <p>centos<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate ntp.sjtu.edu.cn &amp;&amp; hwclock -w</span><br></pre></td></tr></table></figure></p>
 <p>hwclock -w命令是将系统时间，写入BOIS</p>
 <p>如果出现the NTP socketis in use, exiting<br>解决办法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service ntp stop</span><br><span class="line">ntpdate ntp.sjtu.edu.cn &amp;&amp; hwclock -w</span><br></pre></td></tr></table></figure></p>
+<p>杀死tcp connection<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpkill -9 host 114.214.166.200</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -604,7 +605,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
