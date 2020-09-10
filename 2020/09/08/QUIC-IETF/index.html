@@ -95,7 +95,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2020/09/08/QUIC-IETF/States_for_Sending_Parts_of_Streams.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/09/08/QUIC-IETF/States_for_Receiving_Parts_of_Streams.PNG">
-<meta property="og:updated_time" content="2020-09-08T15:19:36.093Z">
+<meta property="og:updated_time" content="2020-09-10T06:34:22.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QUIC IETF">
 <meta name="twitter:description" content="简介QUIC具有以下特点：  流(Stream)的复用 流(Stream)和连接(Connection)的流控 低延迟的连接建立 支持连接迁移和resilience(弹性) to NAT rebinding 加密的header和payload本Draft关于QUIC的内容结构可以分为以下几类   Streams : basic service abstraction Connections: th">
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.4k
+                  2.5k
                 </span>
               
 
@@ -474,12 +474,16 @@
 <li>如果STOP_SENDING帧在Data Sent转态下到达，endpoint会先发送RESET_STREAM帧再停止发送重传的STREAM帧。</li>
 <li>STOP_SENDING SHOULD only be sent for a stream that has not been reset by the peer.</li>
 <li>endpoint应该在STOP_SENDING帧丢失后在发送一个STOP_SENDING帧。如果所有的stream data都到达或者收到RESET_STREAM帧没有必要发送STOP_SENDING帧。</li>
-<li>endpoint如果要终止双向流上所接收与发送，可以通过发送RESET_STREAM来终止一个方向，并发送STOP_SENDING帧促进在相反方向上的终止。<h1 id="flow-control"><a href="#flow-control" class="headerlink" title="flow control"></a>flow control</h1></li>
+<li>endpoint如果要终止双向流上所接收与发送，可以通过发送RESET_STREAM来终止一个方向，并发送STOP_SENDING帧促进在相反方向上的终止。<h1 id="flow-control"><a href="#flow-control" class="headerlink" title="flow control"></a>flow control</h1>streams are flow controlled both individually and as an aggregate.<br>接收方可以再任意时间在stream层级控制发送方能发送的最大数据量<br>为了控制在connection里的并发量，endpoint可以控制其peer的最大初始stream数量<h2 id="Data-flow-control"><a href="#Data-flow-control" class="headerlink" title="Data flow control"></a>Data flow control</h2>QUIC中有两个层级的data flow control</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+<ol>
+<li>stream flow control,防止单条stream消耗掉给一个connection分配的buffer，限制stream上的数据量。</li>
+<li>connection flow control, 防止发送方移除接受方的buffer容量，限制STREAM帧中总的stream data 字节数<br>针对特定的stream用MAX_STREAM_DATA帧，针对connection用MAX_DATA帧。 </li>
+</ol>
 
       
     </div>
@@ -677,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream的核心概念"><span class="nav-number">2.</span> <span class="nav-text">Stream的核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream的类型和标识"><span class="nav-number">2.1.</span> <span class="nav-text">Stream的类型和标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送和接收数据"><span class="nav-number">2.2.</span> <span class="nav-text">发送和接收数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream优先级"><span class="nav-number">2.3.</span> <span class="nav-text">Stream优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对Stream的操作"><span class="nav-number">2.4.</span> <span class="nav-text">对Stream的操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream的状态"><span class="nav-number">3.</span> <span class="nav-text">Stream的状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream发送状态机-Sending-part"><span class="nav-number">3.1.</span> <span class="nav-text">Stream发送状态机(Sending part)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream接收状态机-Receiving-part"><span class="nav-number">3.2.</span> <span class="nav-text">Stream接收状态机(Receiving part)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#允许的帧类型"><span class="nav-number">3.3.</span> <span class="nav-text">允许的帧类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向stream的状态"><span class="nav-number">3.4.</span> <span class="nav-text">双向stream的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自发的状态转移"><span class="nav-number">3.5.</span> <span class="nav-text">自发的状态转移</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flow-control"><span class="nav-number">4.</span> <span class="nav-text">flow control</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream的核心概念"><span class="nav-number">2.</span> <span class="nav-text">Stream的核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream的类型和标识"><span class="nav-number">2.1.</span> <span class="nav-text">Stream的类型和标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送和接收数据"><span class="nav-number">2.2.</span> <span class="nav-text">发送和接收数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream优先级"><span class="nav-number">2.3.</span> <span class="nav-text">Stream优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对Stream的操作"><span class="nav-number">2.4.</span> <span class="nav-text">对Stream的操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream的状态"><span class="nav-number">3.</span> <span class="nav-text">Stream的状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream发送状态机-Sending-part"><span class="nav-number">3.1.</span> <span class="nav-text">Stream发送状态机(Sending part)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream接收状态机-Receiving-part"><span class="nav-number">3.2.</span> <span class="nav-text">Stream接收状态机(Receiving part)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#允许的帧类型"><span class="nav-number">3.3.</span> <span class="nav-text">允许的帧类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向stream的状态"><span class="nav-number">3.4.</span> <span class="nav-text">双向stream的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自发的状态转移"><span class="nav-number">3.5.</span> <span class="nav-text">自发的状态转移</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flow-control"><span class="nav-number">4.</span> <span class="nav-text">flow control</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-flow-control"><span class="nav-number">4.1.</span> <span class="nav-text">Data flow control</span></a></li></ol></li></ol></div>
             
 
           </div>
