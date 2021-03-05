@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[赚钱]]></title>
+    <url>%2F2021%2F03%2F05%2F%E8%B5%9A%E9%92%B1%2F</url>
+    <content type="text"><![CDATA[好像赚钱也没想象中那么难，还是有一些省力的路子能搞到外快。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[怎么理解QUIC 中的endpoint]]></title>
     <url>%2F2020%2F09%2F08%2F%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3QUIC-%E4%B8%AD%E7%9A%84endpoint%2F</url>
     <content type="text"><![CDATA[Endpoint:An entity that can participate in a QUIC connection by generating, receiving, and processing QUIC packets. There are only two types of endpoint in QUIC: client and server.Endpoint是传输的实体，而不是连接结束的点。Client: The endpoint initiating a QUIC connection。Server: The endpoint accepting incoming QUIC connections.]]></content>
